@@ -1,17 +1,17 @@
 .page-banner {
     width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position:50% 25%;
+    @include optimiseBgImg($position: 50% 25%);
 
     h1 {
         color: colour(white);
-        text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
     }
 
     p {
         color: colour(white);
-        text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
+    }
+
+    &--no-image {
+        background: colour(grey);
     }
 
     &__inner {
