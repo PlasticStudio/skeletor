@@ -4,12 +4,22 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Assets\Image;
+use SilverStripe\AssetAdmin\Forms\UploadField;
 
 class Page extends SiteTree {
 
 	private static $db = [
 		'MetaTitle' 	=> 'Text',
 		'MetaKeywords' 	=> 'Text'
+	];
+
+	private static $has_one = [
+		'BannerImage' => Image::class
+	];
+
+	private static $owns = [
+		'BannerImage'
 	];
 
 	public function getCMSFields(){
@@ -24,6 +34,7 @@ class Page extends SiteTree {
 			);
 			$fields->addFieldToTab("Root.Main.Metadata", TextareaField::create('MetaKeywords', 'Meta Keywords'), 'MetaDescription');
 		}
+		$fields->addFieldsToTab('Root.Banner', UploadField::create('BannerImage', 'Banner Image')->setFolderName('Banners'));
 
 		return $fields;
 	}
