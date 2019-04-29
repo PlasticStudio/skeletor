@@ -2200,6 +2200,24 @@ table {
   margin-left: 15px;
   display: none; }
 
+.page-banner {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: 50% 25%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+  .page-banner h1 {
+    color: #FFFFFF; }
+  .page-banner p {
+    color: #FFFFFF; }
+  .page-banner--no-image {
+    background: #BBBBBB; }
+  .page-banner__inner {
+    padding: 30px 5%;
+    min-height: 150px; }
+
 /**
  * Page-specific
  *
