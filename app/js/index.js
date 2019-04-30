@@ -8,3 +8,5 @@ require('../scss/index.scss');
 require('./components/navigation.js');
 require('./components/togglable-content.js');
 require('./components/responsive-images.js');
+
+require('../../node_modules/@fortawesome/fontawesome-free/js/all.js');
