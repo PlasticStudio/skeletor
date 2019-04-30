@@ -6,7 +6,7 @@
 
 	<% if Children %>
 
-		<i class="fa fa-caret-right menu__submenu__toggle"></i>
+		<i class="fas fa-caret-right menu__submenu__toggle"></i>
 
 		<ul class="menu__item__submenu menu__submenu">
 			<% loop Children %>
