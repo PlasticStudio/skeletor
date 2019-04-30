@@ -14,13 +14,9 @@ class PageController extends ContentController {
 		if (Director::isLive()){
 			Requirements::javascript('app/production/index.min.js');
 			Requirements::css('app/production/index.min.css');
-			// Requirements::css('node_modules/@fortawesome/fontawesome-free/css/all.min.css');
-			
 		} else {
 			Requirements::css('app/production/index.css');
 			Requirements::javascript('app/production/index.js');
-			// Requirements::css('node_modules/@fortawesome/fontawesome-free/css/all.css');
 		}
-		
 	}
 }
