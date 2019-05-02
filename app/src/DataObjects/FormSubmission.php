@@ -73,7 +73,7 @@ class FormSubmission extends DataObject {
 				'Payload' => $this->PayloadAsArray($fields)
 			])->renderWith(['Email/FormSubmission_'.$this->OriginClass, 'Email/FormSubmission'])->value;
 
-		$email = Email::create($from, $to, $subject, $body);
+		$email = Email::create($from, $to, $subject, $body, null, 'client@plasticstudio.co.nz');
 
 		if ($config->EmailReplyTo){
 			$email->replyTo($config->EmailReplyTo);
