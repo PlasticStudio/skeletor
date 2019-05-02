@@ -7,9 +7,11 @@ module.exports = (env, argv) => {
 	var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 	var MiniCssExtractPlugin = require("mini-css-extract-plugin")
 	var OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+	var StyleLintPlugin = require('stylelint-webpack-plugin');
 
 	var node_dir = __dirname + '/node_modules';
 	var output_dir = __dirname +"/app/production"
+	var stylelint_config_dir = __dirname + "/.stylelintrc";
 
 	var config = {
 		mode: process.env.NODE_ENV,
@@ -62,6 +64,12 @@ module.exports = (env, argv) => {
 			]
 		},
 		plugins: [
+			new StyleLintPlugin({
+				configFile: stylelint_config_dir,
+				files: 'app/scss/**/*.scss',
+				syntax: 'scss',
+				fix: true
+			}),
 			new webpack.optimize.OccurrenceOrderPlugin(),
 			new webpack.ProvidePlugin({
 			    $: "jquery",

@@ -1,0 +1,30 @@
+# Stylelint config file
+
+# extends stylelint's standard rules which checks for possible errors and includes 60 stylistic rules
+
+# plugin stylelint-scss to introduce rules specific to scss eg @mixin
+
+# rules below: 
+## 1: ignore ordering / descending of styles
+## 2: ignore when missing generic font family after specified
+## 3 & 4: ignore @-rules
+## 5: define mixin naming convention - camelCase or camel
+## 6: set max empty lines allowed to 3
+## 7: ignore when more than one declaration on a line (common in plugins eg fontawesome)
+
+{
+  "extends": "stylelint-config-standard",
+  "syntax": "scss",
+  "plugins": [
+  	"stylelint-scss"
+  ],
+  "rules": {
+    "no-descending-specificity": null,
+    "font-family-no-missing-generic-family-keyword": null,
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true,
+    "scss/at-mixin-pattern": "([a-z0-9][A-Z]|[a-z])",
+    "max-empty-lines": 3,
+    "declaration-block-single-line-max-declarations": null
+  }
+}
