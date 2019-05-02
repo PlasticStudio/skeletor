@@ -13,8 +13,7 @@ use SilverStripe\Core\Environment;
 class SiteConfigExtension extends DataExtension {
 
 	private static $db = [
-		'EmailRecipients' 	=> 'Text',
-		'EmailSender' 		=> 'Text'
+		'EmailRecipients' 	=> 'Text'
 	];
 
 	private static $has_one = [
@@ -31,7 +30,6 @@ class SiteConfigExtension extends DataExtension {
 		$fields->addFieldToTab('Root.Main', UploadField::create('Logo', 'Site logo')->setDescription('Default logo for email templates and shared links on social media'));
         $fields->addFieldToTab('Root.Main', HeaderField::create('Email','Email settings', 2));
         $fields->addFieldToTab('Root.Main', TextField::create('EmailRecipients','Default recipients')->setDescription('Email addresses to send all website emails <strong>to</strong> (comma-separated list)'));
-		$fields->addFieldToTab('Root.Main', TextField::create('EmailSender','Default sender')->setDescription('Name for emails to come <strong>from</strong> (eg Joe Bloggs)'));
 		$fields->addFieldToTab('Root.Main', ReadonlyField::create('EmailFrom_Display','Send all emails from', $this->EmailFrom())->setDescription('This cannot be edited as it needs to be a validated, environment-specific email address.'));
 	}
 
