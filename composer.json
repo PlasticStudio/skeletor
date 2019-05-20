@@ -9,7 +9,8 @@
         "symbiote/silverstripe-gridfieldextensions": "^3.2",
         "undefinedoffset/sortablegridfield": "^2.0",
         "gdmedia/ss-auto-git-ignore": "^1",
-        "jaedb/iconfield": "^1"
+        "jaedb/iconfield": "^1",
+        "plasticstudio/sitemap": "^2"
     },
     "prefer-stable": true,
     "minimum-stability": "dev",
