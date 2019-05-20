@@ -210,20 +210,6 @@ button {
   button:active {
     border-color: #000000; }
 
-/* iOS appearance */
-button,
-textarea,
-input.text,
-input[type="text"],
-input[type="button"],
-input[type="submit"] {
-  -webkit-appearance: none;
-  border-radius: 0; }
-
-a[href^="tel"] {
-  color: inherit;
-  text-decoration: none; }
-
 .field {
   padding-bottom: 15px; }
   .field label {
@@ -242,6 +228,25 @@ input[type="submit"] {
   padding: 10px 30px; }
   input[type="submit"]:hover {
     background: #a2a2a2; }
+
+/**
+ * Removes iOS default styling
+ * 
+ * Targets all necessary inputs and removes the blue underline for phone numbers
+ **/
+button,
+textarea,
+input.text,
+input[type="text"],
+input[type="button"],
+input[type="submit"],
+.input-checkbox {
+  -webkit-appearance: none;
+  border-radius: 0; }
+
+a[href^="tel"] {
+  color: inherit;
+  text-decoration: none; }
 
 ::-webkit-input-placeholder {
   color: rgba(0, 0, 0, 0.25); }
