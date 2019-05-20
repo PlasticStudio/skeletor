@@ -5,11 +5,11 @@ module.exports = (env, argv) => {
 
 	var webpack = require('webpack');
 	var UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-	var MiniCssExtractPlugin = require("mini-css-extract-plugin")
+	var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 	var OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 	var node_dir = __dirname + '/node_modules';
-	var output_dir = __dirname +"/app/production"
+	var output_dir = __dirname +"/app/production";
 
 	var config = {
 		mode: process.env.NODE_ENV,

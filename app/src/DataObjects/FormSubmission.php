@@ -21,22 +21,22 @@ class FormSubmission extends DataObject {
 	private static $description = 'The submission data record for all form submissions';
 	private static $default_sort = 'Created DESC';
 
-	private static $db = array(
+	private static $db = [
 		'Payload' 	=> 'Text',
 		'IPAddress' => 'Varchar(18)'
-	);
+	];
 
-	private static $has_one = array(
+	private static $has_one = [
 		'Origin' => DataObject::class
-	);
+	];
 
-	private static $summary_fields = array(
+	private static $summary_fields = [
 		'Created' 		=> 'Created',
 		'OriginClass' 	=> 'Origin type',
 		'Origin.Title' 	=> 'Origin',
 		'Origin.Link' 	=> 'Origin link',
 		'IPAddress' 	=> 'IP Address'
-	);
+	];
 
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();

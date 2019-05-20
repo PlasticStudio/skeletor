@@ -199,12 +199,13 @@ $(document).ready( function(){
 // compiles into the necessary css files
 __webpack_require__(/*! ../scss/index.scss */ "./app/scss/index.scss");
 
+// Bring in font-awesome via npm
+__webpack_require__(/*! ../../node_modules/@fortawesome/fontawesome-free/js/all.js */ "./node_modules/@fortawesome/fontawesome-free/js/all.js");
+
 // Inject our components
 __webpack_require__(/*! ./components/navigation.js */ "./app/js/components/navigation.js");
 __webpack_require__(/*! ./components/togglable-content.js */ "./app/js/components/togglable-content.js");
 __webpack_require__(/*! ./components/responsive-images.js */ "./app/js/components/responsive-images.js");
-
-__webpack_require__(/*! ../../node_modules/@fortawesome/fontawesome-free/js/all.js */ "./node_modules/@fortawesome/fontawesome-free/js/all.js");
 
 /***/ }),
 

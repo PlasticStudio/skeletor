@@ -8,6 +8,14 @@
     form {
     	margin: 0 auto;
 
+    	/* align checkbox with label for 'remember me' */
+		input.checkbox {
+			width: inherit;
+			float: left;
+			margin: 3px 10px 0 0;
+		}
+
+
     	#ForgotPassword {
     		display: inline-block;
 
@@ -19,8 +27,8 @@
 				cursor: pointer;
 				text-decoration: none;
 				font-size: 12px;
-				text-transform: uppercase;
 				font-weight: 700;
+				text-transform: uppercase;
 				padding: 10px 16px;
 				box-sizing: border-box;
 				border: 0;

@@ -8,9 +8,9 @@ class FormSubmissionAdmin extends ModelAdmin {
     private static $menu_title = 'Submissions';
     private static $menu_icon_class = 'font-icon-edit-list';
 
-    private static $managed_models = array(
+    private static $managed_models = [
 		FormSubmission::class
-    );
+    ];
 }
 
 
