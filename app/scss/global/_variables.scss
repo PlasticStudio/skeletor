@@ -1,3 +1,20 @@
+/* Fonts */
+
+$baseFont: 'Arial';
+$headingFont: 'Times New Roman';
+
+
+/* Breakpoints */
+$base: 0em;
+$xxs: 330px;
+$xs: 460px;
+$sm:  568px;
+$md: 680px;
+$xmd: 880px;
+$lg:  1024px;
+$xl: 1170px;
+$xxl: 1500px;
+
 
 /**
  * Colours
@@ -11,12 +28,7 @@ $colours: (
 	black: #000000,
 	white: #FFFFFF,
 	grey: #BBBBBB,
-	light_grey: #EEEEEE,
-	blue: #06b8e4,
-	orange: #ffa619,
-	green: #69bd45,
-	yellow: #ffd02c,
-	red: #fb4540
+	light_grey: #EEEEEE
 );
 
 // Loop each member of $map as key ($class) and val ($colour)
@@ -37,10 +49,8 @@ $colours: (
 
 	    .darken {
 			background-color: darken($colour, 5%) !important;
-	    }
-		
+	    }		
 	}
-
 }
 
 /**

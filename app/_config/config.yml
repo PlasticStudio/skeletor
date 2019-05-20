@@ -6,3 +6,6 @@ SilverStripe\Core\Manifest\ModuleManifest:
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - SiteConfigExtension
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  editor_css:
+    - 'app/production/editor.css'
