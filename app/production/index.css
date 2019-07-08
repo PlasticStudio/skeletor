@@ -59,11 +59,30 @@
   .light_grey-bg .darken {
     background-color: #e1e1e1 !important; }
 
+.blue-text {
+  color: #0000ff !important; }
+
+.blue-bg {
+  background-color: #0000ff !important; }
+  .blue-bg.semi-trans {
+    background-color: rgba(0, 0, 255, 0.95) !important; }
+  .blue-bg .darken {
+    background-color: #0000e6 !important; }
+
 /**
  * Retrieve colour from $colours map
  * @param  {string} $key [name of colour, as defined in $colours map]
  * @return hex colour
  */
+/*
+	Link box style
+	Use any element but put text in a <p> and if you want an arrow add a <span>
+	eg: <a href="" class="readmore readmore__linkBox"><p>Text</p><span></span></a>
+*/
+/*
+	Size in pixels, either 12, 8, or 6
+	Angle will rotate the whole bracket, either 0 or 90
+*/
 /**
  * [Subtracts the border and padding from the width of the element.]
  */
@@ -327,6 +346,390 @@ footer.page-footer {
   .page-banner__inner {
     padding: 30px 5%;
     min-height: 150px; }
+
+.ResourceHolderPage {
+  /* Change the colour of the pagination */ }
+  .ResourceHolderPage .resources__menu .optionset > label {
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 0 0 10px;
+    /* margin-bottom: 10px;
+			margin-top: 20px; */ }
+  .ResourceHolderPage .resources__menu .field.checkboxset li {
+    display: block; }
+    .ResourceHolderPage .resources__menu .field.checkboxset li label::before {
+      border-radius: 0;
+      border: 1px solid #BBBBBB;
+      width: 18px;
+      height: 18px;
+      top: 0; }
+    .ResourceHolderPage .resources__menu .field.checkboxset li label::after {
+      top: 1px;
+      left: 1px;
+      font-size: 18px; }
+    .ResourceHolderPage .resources__menu .field.checkboxset li input:checked + label:before {
+      background: #0000ff; }
+  .ResourceHolderPage .resources__menu .readmore {
+    margin-top: 40px; }
+  .ResourceHolderPage .pagination ul li a {
+    color: #FFFFFF; }
+  .ResourceHolderPage .pagination ul li.active a {
+    color: #0000ff; }
+  .ResourceHolderPage .pagination .next li a span::before, .ResourceHolderPage .pagination .next li a span::after,
+  .ResourceHolderPage .pagination .previous li a span::before,
+  .ResourceHolderPage .pagination .previous li a span::after {
+    background-color: #FFFFFF; }
+
+.resources .resource {
+  float: left;
+  margin-bottom: 30px;
+  background-color: #FFFFFF;
+  min-height: 450px;
+  position: relative;
+  padding-bottom: 80px; }
+
+.resources .resource__image {
+  width: 100%;
+  height: 220px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
+
+.resources .resource__type--Image {
+  padding-bottom: 0;
+  min-height: 530px; }
+  .resources .resource__type--Image .resource__image {
+    height: 530px; }
+
+.resources .resource__category {
+  font-family: "Times New Roman";
+  font-size: 11px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0000ff;
+  display: inline-block;
+  padding: 12px 22px;
+  background-color: #000000;
+  margin: 50px 0 0; }
+
+.resources .resource__content {
+  padding: 30px 25px; }
+  .resources .resource__content h2 {
+    font-family: "Times New Roman";
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: 1px; }
+    .resources .resource__content h2 a {
+      color: #000000; }
+  .resources .resource__content p {
+    font-size: 18px; }
+  .resources .resource__content .readmore {
+    position: absolute;
+    bottom: 25px;
+    left: 25px; }
+    .resources .resource__content .readmore p {
+      font-size: 14px; }
+
+.resources__all {
+  margin-bottom: 80px; }
+  .resources__all .resource {
+    width: 31%;
+    margin-right: 3.4%; }
+    .resources__all .resource:nth-child(3n) {
+      margin-right: 0; }
+    .resources__all .resource:nth-child(4n) {
+      clear: left; }
+    @media (max-width: 1170px) {
+      .resources__all .resource {
+        width: 48%;
+        margin-right: 4%; }
+        .resources__all .resource:nth-child(2n) {
+          margin-right: 0; }
+        .resources__all .resource:nth-child(3) {
+          margin-right: 3.4%;
+          clear: left; }
+        .resources__all .resource:nth-child(4) {
+          clear: none; } }
+
+.resources__featured .resource {
+  width: 23.5%;
+  margin-right: 2%;
+  height: 450px; }
+  .resources__featured .resource:nth-child(3), .resources__featured .resource:nth-child(4n+7) {
+    margin-right: 0; }
+
+.resources__featured .resource--first {
+  width: 49%;
+  padding: 0;
+  min-height: 530px; }
+  .resources__featured .resource--first .resource__image {
+    width: 48%;
+    margin-right: 2%;
+    min-height: 530px;
+    float: left; }
+  .resources__featured .resource--first .resource__content {
+    width: 40%;
+    float: left;
+    padding: 30px 5%; }
+    .resources__featured .resource--first .resource__content .resource__category {
+      background-color: transparent;
+      color: #EEEEEE;
+      padding: 0 0 20px; }
+  .resources__featured .resource--first .readmore {
+    left: 55%; }
+
+@media (max-width: 1330px) {
+  .resources__featured .resource {
+    width: 31%;
+    margin-right: 3%; }
+    .resources__featured .resource:nth-child(3), .resources__featured .resource:nth-child(4n+7) {
+      margin-right: 3%; }
+    .resources__featured .resource:nth-child(2), .resources__featured .resource:nth-child(3n+5) {
+      margin-right: 0; }
+  .resources__featured .resource--first {
+    width: 65%; } }
+
+@media (max-width: 880px) {
+  .resources__featured .resource {
+    width: 48.5%; }
+    .resources__featured .resource:nth-child(2), .resources__featured .resource:nth-child(3n+5) {
+      margin-right: 3%; }
+    .resources__featured .resource:nth-child(2n+3) {
+      margin-right: 0; }
+  .resources__featured .resource--first {
+    width: 100%;
+    margin-right: 0; } }
+
+@media (max-width: 680px) {
+  .resources__featured .resource {
+    width: 100%;
+    margin-right: 0; }
+    .resources__featured .resource:nth-child(2), .resources__featured .resource:nth-child(3n+5) {
+      margin-right: 0; }
+  .resources__featured .resource--first {
+    padding-bottom: 80px; }
+    .resources__featured .resource--first .resource__image {
+      width: 100%;
+      float: none;
+      margin: 0; }
+    .resources__featured .resource--first .resource__content {
+      width: 90%;
+      float: none; }
+      .resources__featured .resource--first .resource__content .resource__category {
+        margin: 0; }
+    .resources__featured .resource--first .readmore {
+      left: 25px; } }
+
+.resources__menu {
+  position: relative;
+  z-index: 2; }
+
+/* filtering form, change to select boxes */
+@media (max-width: 1024px) {
+  .ResourceHolderPage .sidebar__left {
+    width: 100%;
+    float: none;
+    margin: 0; }
+  .ResourceHolderPage #Form_FilterForm .field.checkboxset {
+    float: left;
+    width: 30%;
+    margin-right: 3%; } }
+
+/*
+	POPUPS
+*/
+.hide {
+  display: none; }
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1002;
+  background: rgba(0, 0, 0, 0.9);
+  height: 100%;
+  width: 100%; }
+  .popup .inner {
+    height: 100%;
+    width: 100%;
+    top: 0; }
+  .popup_close {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; }
+    @media all and (max-width: 680px) {
+      .popup_close {
+        position: fixed;
+        top: 50px;
+        right: 27px; } }
+    .popup_close span {
+      display: block;
+      position: absolute;
+      height: 3px;
+      width: 60%;
+      background-color: #FFFFFF;
+      border-radius: 2px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      margin: auto; }
+      .popup_close span:first-child {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg); }
+      .popup_close span:last-child {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg); }
+  .popup_content {
+    position: relative;
+    background: #FFFFFF;
+    max-height: 93%;
+    overflow-y: auto;
+    margin: 2rem auto; }
+    @media all and (max-width: 680px) {
+      .popup_content {
+        width: 94%;
+        margin: 2rem 0; } }
+  .popup_liner {
+    height: 100%;
+    position: relative;
+    padding: 3em; }
+
+.capability_popup {
+  position: relative; }
+  .capability_popup .capability_content {
+    color: #BBBBBB;
+    overflow: auto hidden; }
+  .capability_popup .capability_name {
+    font-size: 2rem;
+    padding: 0 0 0.5em; }
+  .capability_popup .capability_banner {
+    background: url("../images/rounded-square-pattern-orange.jpg") no-repeat center center;
+    color: #FFFFFF;
+    margin: -3em;
+    margin-top: 3em; }
+    .capability_popup .capability_banner_content {
+      padding: 3rem;
+      text-align: center; }
+      .capability_popup .capability_banner_content h3 {
+        color: #FFFFFF;
+        font-size: 2rem;
+        padding: 0 0 1rem; }
+        @media all and (max-width: 680px) {
+          .capability_popup .capability_banner_content h3 {
+            font-size: 1.4rem;
+            line-height: 1.7rem; } }
+      .capability_popup .capability_banner_content a {
+        color: pink; }
+  .capability_popup .tabs_related {
+    position: absolute;
+    margin: 4em 0 2em; }
+    .capability_popup .tabs_related h4 {
+      font-size: 1.2rem;
+      color: #BBBBBB; }
+    .capability_popup .tabs_related .tabs_tabs {
+      margin-bottom: 0; }
+      .capability_popup .tabs_related .tabs_tabs li a {
+        border: 2px solid; }
+        .capability_popup .tabs_related .tabs_tabs li a:hover {
+          color: #FFFFFF; }
+
+.pagination {
+  position: relative; }
+  .pagination ul {
+    padding: 0 40px; }
+    .pagination ul.hidden-xs {
+      text-align: center; }
+    .pagination ul li {
+      display: inline-block; }
+      .pagination ul li a {
+        display: block;
+        padding: 10px 20px;
+        font-family: 'Nunito';
+        font-size: 16px;
+        font-weight: 800;
+        color: #000000; }
+      .pagination ul li.active a {
+        color: #0000ff; }
+  .pagination .next,
+  .pagination .previous {
+    padding: 0;
+    position: absolute;
+    top: 0; }
+    .pagination .next li,
+    .pagination .previous li {
+      margin: 0; }
+      .pagination .next li a,
+      .pagination .previous li a {
+        position: relative;
+        display: block;
+        width: 30px;
+        height: 30px;
+        padding: 5px; }
+        .pagination .next li a span,
+        .pagination .previous li a span {
+          transform: rotate(0deg);
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          margin: auto;
+          z-index: 2;
+          display: block;
+          width: 32px;
+          height: 35px;
+          left: 0; }
+          .pagination .next li a span::after, .pagination .next li a span::before,
+          .pagination .previous li a span::after,
+          .pagination .previous li a span::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 2px;
+            background: #000000;
+            position: absolute;
+            top: 0;
+            left: 0; }
+          .pagination .next li a span::before,
+          .pagination .previous li a span::before {
+            transform: rotate(-45deg); }
+          .pagination .next li a span::after,
+          .pagination .previous li a span::after {
+            transform: rotate(45deg); }
+          .pagination .next li a span::before,
+          .pagination .previous li a span::before {
+            left: 12px;
+            top: 20px; }
+          .pagination .next li a span::after,
+          .pagination .previous li a span::after {
+            left: 12px;
+            top: 12px; }
+  .pagination .previous {
+    left: 0; }
+  .pagination .next {
+    right: 0; }
+  .pagination .previous li a span {
+    transform: rotate(180deg); }
 
 /**
  * Page-specific

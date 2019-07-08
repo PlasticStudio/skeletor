@@ -1,3 +1,139 @@
+
+
+@mixin fontRules($family: base, $size: 16, $weight: 400) {
+
+	@if $family == 'nunito' {
+		font-family: 'Nunito';
+	}
+
+	@if $family == 'base' {
+		font-family: 'Lato';
+	}
+
+	@if $family == 'betasans' {
+		font-family: 'BetaSans';
+	}
+
+	font-size: $size + px;
+	font-weight: $weight;
+}
+
+
+/*
+	Link box style
+	Use any element but put text in a <p> and if you want an arrow add a <span>
+	eg: <a href="" class="readmore readmore__linkBox"><p>Text</p><span></span></a>
+*/
+@mixin linkBox($textColour: colour(black), $bgColour: colour(white), $borderColour: colour(black)) {
+	display: inline-block;
+	padding: 10px 35px 9px 19px;
+	position: relative;
+	border: 2px solid $borderColour;
+	overflow: hidden;
+	
+	p {
+		@include fontRules(nunito, 13, 900);
+		color: $textColour;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		margin: 0;
+		position: relative;
+		z-index: 2;
+	}
+
+	span {
+		@include angleBracket(8, 0, colour(black));			
+	}
+
+	&::after {
+		content: '';
+		display: block;
+	    width: 5px;
+	    height: 0;
+	    border-style: solid;
+	    border-width: 60px 60px 0 0;
+	    border-color: colour(yellow) transparent transparent transparent;
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    z-index: 1;
+	    transition: width 0.3s;
+	}
+
+	&:hover {
+		&::after {
+			width: 100%;
+		}
+	}
+}
+
+/*
+	Size in pixels, either 12, 8, or 6
+	Angle will rotate the whole bracket, either 0 or 90
+*/
+@mixin angleBracket($size, $angle, $bgcolour: colour(white)) {
+	transform: rotate($angle + deg);
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	z-index: 2;
+	
+	&::after,
+	&::before {
+		content: '';
+		display: block;
+		width: $size + px;
+		height: 2px;
+		background: $bgcolour;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	&::before {
+		transform: rotate(-45deg);
+	}
+	
+	&::after {
+		transform: rotate(45deg);		
+	}
+
+	@if $size == 12 {
+		&::before {
+			left: 12px;
+			top: 20px;
+		}
+
+		&::after {
+			left: 12px;
+			top: 12px;
+		}
+	}
+
+	@if $size == 8 {
+		&::before {
+			top: 10px;
+		}
+		&::after {
+			top: 5px;
+		}
+	}
+
+	@if $size == 6 {
+		&::before {
+			top: 8px;
+		}
+		&::after {
+			top: 5px;
+		}
+	}
+}
+
+
 /**
  * [Subtracts the border and padding from the width of the element.]
  */
