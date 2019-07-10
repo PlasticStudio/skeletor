@@ -80,22 +80,22 @@ class ResourceHolderPageController extends PageController {
 				'Category', 
 				'Category',
 				$this->Categories()->map('Title')
-			)->setDefaultItems( (isset($params['Category']) && is_array($params['Category']) ) ? array_keys($params['Category']) : '' ),
+			)->setValue( (isset($params['Category']) && is_array($params['Category']) ) ? array_keys($params['Category']) : '' ),
 			CheckboxsetField::create(
 				'Type', 
 				'Type',
 				$this->ResourceTypesDataList()->map('Name', 'Value')
-			)->setDefaultItems( (isset($params['Type']) && is_array($params['Type']) ) ? array_keys($params['Type']) : '' ),
+			)->setValue( (isset($params['Type']) && is_array($params['Type']) ) ? array_keys($params['Type']) : '' ),
 			CheckboxsetField::create(
 				'Tag', 
 				'Tag',
 				$this->Tags()->map('Title')
-			)->setDefaultItems( (isset($params['Tag']) && is_array($params['Tag']) ) ? array_keys($params['Tag']) : '' ),
+			)->setValue( (isset($params['Tag']) && is_array($params['Tag']) ) ? array_keys($params['Tag']) : '' ),
 			LiteralField::create('Button', '<a class="readmore readmore__linkBox" href="/insights"><p>Clear</p></span></span></a>')
 		);
 
 		$actions = FieldList::create(
-		//	FormAction::create('doFilterForm')->setTitle('Filter')
+			FormAction::create('doFilterForm')->setTitle('Filter')
 		);
 
 		return Form::create($this, 'FilterForm', $fields, $actions)
