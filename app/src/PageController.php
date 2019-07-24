@@ -19,4 +19,16 @@ class PageController extends ContentController {
 			Requirements::javascript('app/production/index.js');
 		}
 	}
+
+	/**
+     * Returns whether or not the application is in dev/test mode.
+     * @return boolean
+     */
+    public function IsDev() {
+		if (Director::isDev() || Director::isTest()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
