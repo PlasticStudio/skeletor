@@ -21,14 +21,10 @@ class PageController extends ContentController {
 	}
 
 	/**
-     * Returns whether or not the application is in dev/test mode.
-     * @return boolean
-     */
-    public function IsDev() {
-		if (Director::isDev() || Director::isTest()) {
-			return true;
-		} else {
-			return false;
-		}
+	 * Returns the GoogloeAnalytics token if in live environment mode
+	 * @return String
+	 **/
+	public function getGoogleAnalyticsKey() {
+		return Config::inst()->get('Google', 'analytics');
 	}
 }
