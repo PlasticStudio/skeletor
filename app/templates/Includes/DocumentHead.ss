@@ -5,7 +5,7 @@
 	<% base_tag %>
 
 	<meta charset="utf-8">
-	<title>$MenuTitle.XML | $SiteConfig.Title</title>
+	<title><% if MetaTitle %>$MetaTitle<% else %>$MenuTitle.XML | $SiteConfig.Title<% end_if %></title>
 
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport" />
 	
