@@ -1,3 +1,68 @@
+/*
+	Build a link with an angle bracket arrow to the right of the text
+	Include this mixin on the parent item AND add a span after the text eg <a class="button">Text<span></span></a>
+	Default size is 20 and angle is 0 (pointing right)
+*/
+@mixin arrowLink($textColour: colour(black), $bgColour: transparent, $size: 20, $angle: 0) {
+	position: relative;
+	padding-right: $size + 10 + px;
+
+	/* colouring */
+	color: $textColour;
+	background: $bgColour;
+	
+	/* apply the bracket */
+	span {
+		@include angleBracket($size, $angle, $textColour);
+	}	
+}
+
+/*
+	Size in pixels (no px)
+	Angle will rotate the whole bracket
+*/
+@mixin angleBracket($size, $angle, $bgcolour: colour(white)) {
+	
+	/* calculate size and positions */
+	$barWidth: $size * 0.6;
+	$beforeTop: $size * 0.25;
+	$afterBottom: $size * 0.25;
+	$left: ($size - $barWidth) / 2;
+
+	transform: rotate($angle + deg);
+	width: $size + px;
+	height: $size + px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 5px;
+	margin: auto;
+	z-index: 2;
+	
+	&::after,
+	&::before {
+		content: '';
+		display: block;
+		width: $barWidth + px;
+		height: 2px;
+		background: $bgcolour;
+		position: absolute;
+	}
+
+	&::before {
+		transform: rotate(45deg);
+		top: $beforeTop + px;
+		left: $left + px;
+	}
+	
+	&::after {
+		transform: rotate(-45deg);
+		left: $left + px;
+		bottom: $afterBottom + px;
+	}
+}
+
+
 /**
  * [Subtracts the border and padding from the width of the element.]
  */
