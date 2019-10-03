@@ -65,6 +65,12 @@
  * @return hex colour
  */
 /*
+	Use to apply fonts - family, size and weight
+	Family: base, heading or the actual font family eg: 'Times Roman'
+	Size: num value
+	Weight: num value
+*/
+/*
 	Build a link with an angle bracket arrow to the right of the text
 	Include this mixin on the parent item AND add a span after the text eg <a class="button">Text<span></span></a>
 	Default size is 20 and angle is 0 (pointing right)
