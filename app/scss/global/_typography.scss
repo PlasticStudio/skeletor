@@ -62,3 +62,14 @@ a {
 .text-justify {
     text-align: justify;
 }
+
+/* example angle bracket link */
+.button {
+	/* positioning and style for the link here */
+	display: inline-block;
+	padding: 10px;
+	text-decoration: none;
+	/* or add styles into the arrowLink() mixin if common across site */
+	/* add an angle bracket here */
+	@include arrowLink($size: 15, $bgColour: colour(grey));
+}

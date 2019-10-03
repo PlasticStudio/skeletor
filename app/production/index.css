@@ -64,6 +64,15 @@
  * @param  {string} $key [name of colour, as defined in $colours map]
  * @return hex colour
  */
+/*
+	Build a link with an angle bracket arrow to the right of the text
+	Include this mixin on the parent item AND add a span after the text eg <a class="button">Text<span></span></a>
+	Default size is 20 and angle is 0 (pointing right)
+*/
+/*
+	Size in pixels (no px)
+	Angle will rotate the whole bracket
+*/
 /**
  * [Subtracts the border and padding from the width of the element.]
  */
@@ -187,6 +196,47 @@ a {
 
 .text-justify {
   text-align: justify; }
+
+/* example angle bracket link */
+.button {
+  /* positioning and style for the link here */
+  display: inline-block;
+  padding: 10px;
+  text-decoration: none;
+  /* or add styles into the arrowLink() mixin if common across site */
+  /* add an angle bracket here */
+  position: relative;
+  padding-right: 25px;
+  /* colouring */
+  color: #000000;
+  background: #BBBBBB;
+  /* apply the bracket */ }
+  .button span {
+    /* calculate size and positions */
+    transform: rotate(0deg);
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 5px;
+    margin: auto;
+    z-index: 2; }
+    .button span::after, .button span::before {
+      content: '';
+      display: block;
+      width: 9px;
+      height: 2px;
+      background: #000000;
+      position: absolute; }
+    .button span::before {
+      transform: rotate(45deg);
+      top: 3.75px;
+      left: 3px; }
+    .button span::after {
+      transform: rotate(-45deg);
+      left: 3px;
+      bottom: 3.75px; }
 
 input,
 select,
