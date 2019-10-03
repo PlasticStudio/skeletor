@@ -4,22 +4,24 @@
 	Size: num value
 	Weight: num value
 */
-@mixin fontRules($family: base, $size: 16, $weight: 400) {
+@mixin fontRules($family: base, $size: '', $weight: '') {
 
 	@if $family == 'heading' {
 		font-family: $headingFont;
-	}
-
-	@if $family == 'base' {
-		font-family: $baseFont;
-	}
 	
-	font-family: $family;
-	font-size: $size + px;
-	font-weight: $weight;
+	} @else if $family == 'base' {
+		font-family: $baseFont;
+
+	} @else {
+		font-family: $family;
+	}
+
+	@if $size != '' {
+		font-size: $size + px;
+	}
+
+	font-weight: #{$weight};
 }
-
-
 
 
 /*
