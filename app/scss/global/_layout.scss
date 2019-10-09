@@ -7,3 +7,24 @@
 .cf {
 	@include clearfix();
 }
+
+
+/* 
+In conjunction with video embed fix /app/js/components/content-video-embeds.js
+*/
+.embed {
+	width: 0;
+	height: 0;
+
+	&.leftAlone {
+		float: left;
+	}
+	&.center {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
+	&.rightAlone {
+		float: right;
+	}
+}

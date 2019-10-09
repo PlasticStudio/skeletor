@@ -133,6 +133,21 @@
   clear: both;
   display: block; }
 
+/* 
+In conjunction with video embed fix /app/js/components/content-video-embeds.js
+*/
+.embed {
+  width: 0;
+  height: 0; }
+  .embed.leftAlone {
+    float: left; }
+  .embed.center {
+    display: block;
+    float: none;
+    margin: 0 auto; }
+  .embed.rightAlone {
+    float: right; }
+
 /**
  * Global typographic styles
  *
