@@ -19,16 +19,25 @@ In conjunction with video embed fix /app/js/components/content-video-embeds.js
 	&.leftAlone {
 		float: left;
 	}
+	&.rightAlone {
+		float: right;
+	}
 	&.center {
 		display: block;
 		float: none;
 		margin: 0 auto;
 	}
-	&.rightAlone {
+	&.left {
+		float: left;
+		padding-right: 0.5em;
+	}
+	&.right {
 		float: right;
+		padding-left: 0.5em;
 	}
 }
 
+.captionImage, 
 .ss-htmleditorfield-file.image {
 	max-width: 100%;
 	height: auto;
@@ -36,29 +45,20 @@ In conjunction with video embed fix /app/js/components/content-video-embeds.js
 	&.leftAlone {
 		float: left;
 	}
+	&.rightAlone {
+		float: right;
+	}
 	&.center {
 		display: block;
 		float: none;
 		margin: 0 auto;
 	}
-	&.rightAlone {
-		float: right;
-	}
-}
-
-.captionImage {
-	max-width: 100%;
-	height: auto;
-
-	&.leftAlone {
+	&.left {
 		float: left;
+		padding-right: 0.5em;
 	}
-	&.center {
-		display: block;
-		float: none;
-		margin: 0 auto;
-	}
-	&.rightAlone {
+	&.right {
 		float: right;
+		padding-left: 0.5em;
 	}
 }

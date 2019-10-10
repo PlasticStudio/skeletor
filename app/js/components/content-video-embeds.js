@@ -39,7 +39,6 @@ $(document).ready(function () {
         // get the width and calculate the height from the width and aspect ratio data attributes set in the previous function
         // set the width and height of the embed, replace the inner iframe width and height with a full 100%
         // apply a clear: both to the trailing element if video is set by itself
-        // add padding to the bottom if a caption is present
         function setInitialSizing() {
             $('.ss-htmleditorfield-file.embed').each(function () {
                 var trueAspectRatio = $(this).data('ratio');
@@ -56,10 +55,6 @@ $(document).ready(function () {
                 if ($(this).hasClass('leftAlone') || $(this).hasClass('center') || $(this).hasClass('rightAlone')) {
                     $(this).next().css('clear', 'both');
                 }
-
-                if ($(this).find('.caption').length > 0) {
-                    $(this).css('padding-bottom', '40px');
-                }
             }); 
         }
 
@@ -67,6 +62,7 @@ $(document).ready(function () {
         // grab the current width
         // grab the aspect ratio from the data attribute
         // if the current is smaller than the original width, adjust the height by setting it based on the aspect ratio
+        // add/adjust padding to the bottom if a caption is present
         function resizeEmbeds() {
             $('.ss-htmleditorfield-file.embed').each(function () {
 
@@ -77,6 +73,11 @@ $(document).ready(function () {
                 if (currentWidth < attributeWidth) {
                     var newHeight = Math.floor(currentWidth * attributeAspectRatio);
                     $(this).css('height', newHeight + 'px');
+                }
+
+                if ($(this).find('.caption').length > 0) {
+                    var captionHeight = $(this).find('.caption').height();
+                    $(this).css('padding-bottom', captionHeight + 17 + 'px'); //53px
                 }
             }); 
         }
