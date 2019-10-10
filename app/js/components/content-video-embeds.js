@@ -77,7 +77,7 @@ $(document).ready(function () {
 
                 if ($(this).find('.caption').length > 0) {
                     var captionHeight = $(this).find('.caption').height();
-                    $(this).css('padding-bottom', captionHeight + 17 + 'px'); //53px
+                    $(this).css('padding-bottom', captionHeight + 17 + 'px');
                 }
             }); 
         }
