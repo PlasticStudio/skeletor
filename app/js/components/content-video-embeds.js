@@ -1,10 +1,10 @@
 /* 
-In conjunction with .embed styling in /app/scss/global/_layout.scss 
+In conjunction with .ss-htmleditorfield-file.embed styling in /app/scss/global/_layout.scss 
 */
 
 $(document).ready(function () {
 
-    if ($('.embed').length > 0) {
+    if ($('.ss-htmleditorfield-file.embed').length > 0) {
         setDataAttributes();
         setInitialSizing();
         resizeEmbeds();
@@ -17,7 +17,7 @@ $(document).ready(function () {
         // calculate the aspect ratio by grabbing the inner iframe's original width and height and set ratio as a data attribute
         // if a custom overwritten width has been set use this otherwise use the original width, set width as a data attribute
         function setDataAttributes() {
-            $('.embed').each(function () {
+            $('.ss-htmleditorfield-file.embed').each(function () {
                 $(this).css('max-width', 'auto'); // this is set in place to not overwrite the custom set width
 
                 var originalWidth = $(this).children('iframe').css('width');
@@ -41,7 +41,7 @@ $(document).ready(function () {
         // apply a clear: both to the trailing element if video is set by itself
         // add padding to the bottom if a caption is present
         function setInitialSizing() {
-            $('.embed').each(function () {
+            $('.ss-htmleditorfield-file.embed').each(function () {
                 var trueAspectRatio = $(this).data('ratio');
                 var trueWidth = (parseInt($(this).data('width')));
                 var trueHeight = Math.floor(trueWidth * trueAspectRatio);
@@ -68,7 +68,7 @@ $(document).ready(function () {
         // grab the aspect ratio from the data attribute
         // if the current is smaller than the original width, adjust the height by setting it based on the aspect ratio
         function resizeEmbeds() {
-            $('.embed').each(function () {
+            $('.ss-htmleditorfield-file.embed').each(function () {
 
                 var attributeAspectRatio = $(this).data('ratio');
                 var currentWidth = (parseInt($(this).css('width')));

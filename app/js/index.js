@@ -12,3 +12,4 @@ require('./components/navigation.js');
 require('./components/togglable-content.js');
 require('./components/responsive-images.js');
 require('./components/content-video-embeds.js');
+require('./components/content-image-alignment.js');

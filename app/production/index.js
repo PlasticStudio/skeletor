@@ -86,6 +86,46 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./app/js/components/content-image-alignment.js":
+/*!******************************************************!*\
+  !*** ./app/js/components/content-image-alignment.js ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function($) {/* 
+In conjunction with .ss-htmleditorfield-file.image styling in /app/scss/global/_layout.scss 
+*/
+
+$(document).ready(function () {
+        
+    if ($('.ss-htmleditorfield-file.image').length > 0) {
+
+        addClearFix();
+
+        function addClearFix() {
+            $('.ss-htmleditorfield-file.image').each(function () {
+
+                if ($(this).parent().hasClass('captionImage')) {
+                    console.log('yes');
+                    if ($(this).parent().hasClass('leftAlone') || $(this).hasClass('center') || $(this).hasClass('rightAlone')) {
+                        console.log('yes again');
+                        $(this).parent().next().css('clear', 'both');
+                    }
+                } else {
+                    console.log('no');
+                    if ($(this).hasClass('leftAlone') || $(this).hasClass('center') || $(this).hasClass('rightAlone')) {
+                        $(this).parent().next().css('clear', 'both');
+                    }
+                }
+            }); 
+        }
+    }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js")))
+
+/***/ }),
+
 /***/ "./app/js/components/content-video-embeds.js":
 /*!***************************************************!*\
   !*** ./app/js/components/content-video-embeds.js ***!
@@ -94,12 +134,12 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function($) {/* 
-In conjunction with .embed styling in /app/scss/global/_layout.scss 
+In conjunction with .ss-htmleditorfield-file.embed styling in /app/scss/global/_layout.scss 
 */
 
 $(document).ready(function () {
 
-    if ($('.embed').length > 0) {
+    if ($('.ss-htmleditorfield-file.embed').length > 0) {
         setDataAttributes();
         setInitialSizing();
         resizeEmbeds();
@@ -112,7 +152,7 @@ $(document).ready(function () {
         // calculate the aspect ratio by grabbing the inner iframe's original width and height and set ratio as a data attribute
         // if a custom overwritten width has been set use this otherwise use the original width, set width as a data attribute
         function setDataAttributes() {
-            $('.embed').each(function () {
+            $('.ss-htmleditorfield-file.embed').each(function () {
                 $(this).css('max-width', 'auto'); // this is set in place to not overwrite the custom set width
 
                 var originalWidth = $(this).children('iframe').css('width');
@@ -136,7 +176,7 @@ $(document).ready(function () {
         // apply a clear: both to the trailing element if video is set by itself
         // add padding to the bottom if a caption is present
         function setInitialSizing() {
-            $('.embed').each(function () {
+            $('.ss-htmleditorfield-file.embed').each(function () {
                 var trueAspectRatio = $(this).data('ratio');
                 var trueWidth = (parseInt($(this).data('width')));
                 var trueHeight = Math.floor(trueWidth * trueAspectRatio);
@@ -163,7 +203,7 @@ $(document).ready(function () {
         // grab the aspect ratio from the data attribute
         // if the current is smaller than the original width, adjust the height by setting it based on the aspect ratio
         function resizeEmbeds() {
-            $('.embed').each(function () {
+            $('.ss-htmleditorfield-file.embed').each(function () {
 
                 var attributeAspectRatio = $(this).data('ratio');
                 var currentWidth = (parseInt($(this).css('width')));
@@ -302,6 +342,7 @@ __webpack_require__(/*! ./components/navigation.js */ "./app/js/components/navig
 __webpack_require__(/*! ./components/togglable-content.js */ "./app/js/components/togglable-content.js");
 __webpack_require__(/*! ./components/responsive-images.js */ "./app/js/components/responsive-images.js");
 __webpack_require__(/*! ./components/content-video-embeds.js */ "./app/js/components/content-video-embeds.js");
+__webpack_require__(/*! ./components/content-image-alignment.js */ "./app/js/components/content-image-alignment.js");
 
 /***/ }),
 

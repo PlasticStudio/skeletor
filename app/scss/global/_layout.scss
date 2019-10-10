@@ -12,9 +12,43 @@
 /* 
 In conjunction with video embed fix /app/js/components/content-video-embeds.js
 */
-.embed {
+.ss-htmleditorfield-file.embed {
 	width: 0;
 	height: 0;
+
+	&.leftAlone {
+		float: left;
+	}
+	&.center {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
+	&.rightAlone {
+		float: right;
+	}
+}
+
+.ss-htmleditorfield-file.image {
+	max-width: 100%;
+	height: auto;
+
+	&.leftAlone {
+		float: left;
+	}
+	&.center {
+		display: block;
+		float: none;
+		margin: 0 auto;
+	}
+	&.rightAlone {
+		float: right;
+	}
+}
+
+.captionImage {
+	max-width: 100%;
+	height: auto;
 
 	&.leftAlone {
 		float: left;

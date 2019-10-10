@@ -136,16 +136,40 @@
 /* 
 In conjunction with video embed fix /app/js/components/content-video-embeds.js
 */
-.embed {
+.ss-htmleditorfield-file.embed {
   width: 0;
   height: 0; }
-  .embed.leftAlone {
+  .ss-htmleditorfield-file.embed.leftAlone {
     float: left; }
-  .embed.center {
+  .ss-htmleditorfield-file.embed.center {
     display: block;
     float: none;
     margin: 0 auto; }
-  .embed.rightAlone {
+  .ss-htmleditorfield-file.embed.rightAlone {
+    float: right; }
+
+.ss-htmleditorfield-file.image {
+  max-width: 100%;
+  height: auto; }
+  .ss-htmleditorfield-file.image.leftAlone {
+    float: left; }
+  .ss-htmleditorfield-file.image.center {
+    display: block;
+    float: none;
+    margin: 0 auto; }
+  .ss-htmleditorfield-file.image.rightAlone {
+    float: right; }
+
+.captionImage {
+  max-width: 100%;
+  height: auto; }
+  .captionImage.leftAlone {
+    float: left; }
+  .captionImage.center {
+    display: block;
+    float: none;
+    margin: 0 auto; }
+  .captionImage.rightAlone {
     float: right; }
 
 /**
