@@ -133,6 +133,54 @@
   clear: both;
   display: block; }
 
+/* 
+In conjunction with video embed fix /app/js/components/content-video-embeds.js
+*/
+.ss-htmleditorfield-file.embed {
+  width: 0;
+  height: 0; }
+  .ss-htmleditorfield-file.embed.leftAlone {
+    float: left; }
+  .ss-htmleditorfield-file.embed.rightAlone {
+    float: right; }
+  .ss-htmleditorfield-file.embed.center {
+    display: block;
+    float: none;
+    margin: 0 auto; }
+  .ss-htmleditorfield-file.embed.left {
+    float: left;
+    padding-right: 0.5em; }
+  .ss-htmleditorfield-file.embed.right {
+    float: right;
+    padding-left: 0.5em; }
+
+/* 
+In conjunction with image alignment fix /app/js/components/content-image-alignment.js
+*/
+.captionImage,
+.ss-htmleditorfield-file.image {
+  max-width: 100%;
+  height: auto; }
+  .captionImage.leftAlone,
+  .ss-htmleditorfield-file.image.leftAlone {
+    float: left; }
+  .captionImage.rightAlone,
+  .ss-htmleditorfield-file.image.rightAlone {
+    float: right; }
+  .captionImage.center,
+  .ss-htmleditorfield-file.image.center {
+    display: block;
+    float: none;
+    margin: 0 auto; }
+  .captionImage.left,
+  .ss-htmleditorfield-file.image.left {
+    float: left;
+    padding-right: 0.5em; }
+  .captionImage.right,
+  .ss-htmleditorfield-file.image.right {
+    float: right;
+    padding-left: 0.5em; }
+
 /**
  * Global typographic styles
  *
