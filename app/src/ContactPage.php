@@ -12,7 +12,7 @@ use SilverStripe\SiteConfig\SiteConfig;
 class ContactPage extends Page {
 	
 	private static $description = 'Standard page with a contact form';
-	private static $icon = 'app/cms/icons/email.png';
+	private static $icon_class = 'font-icon-p-book';
 
     private static $db = [
         'Recipients'		=> 'Varchar(1024)',

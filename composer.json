@@ -10,7 +10,8 @@
         "undefinedoffset/sortablegridfield": "^2.0",
         "gdmedia/ss-auto-git-ignore": "^1",
         "jaedb/iconfield": "^1",
-        "plasticstudio/sitemap": "^2"
+        "plasticstudio/sitemap": "^2",
+        "dnadesign/silverstripe-elemental": "^4"
     },
     "prefer-stable": true,
     "minimum-stability": "dev",
