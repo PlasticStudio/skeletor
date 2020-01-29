@@ -12,6 +12,11 @@ class DemoElement extends BaseElement {
 	private static $description = 'Demo element to showcase namespaceing and core class methods.';
 	private static $icon = 'font-icon-p-a';
 
+	/*
+	    Set inline_editable to false when using a GridField.
+	    private static $inline_editable = false;
+	*/
+
 	private static $db = [
 		'DemoText' => 'Text',
 	];
