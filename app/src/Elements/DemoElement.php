@@ -13,8 +13,8 @@ class DemoElement extends BaseElement {
 	private static $icon = 'font-icon-p-a';
 
 	/*
-	    Set inline_editable to false when using a GridField.
-	    private static $inline_editable = false;
+	 * For elements that are more complex (e.g. have a Gridfield) disable the
+	 * in-line edit form by setting private static $inline_editable = false
 	*/
 
 	private static $db = [
