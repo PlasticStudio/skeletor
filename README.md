@@ -8,7 +8,7 @@ Base install for all PlasticStudio projects.
 
 
 ## Functionality
-Describe any noteworthy pieces of functioality specific to this project.
+Describe any noteworthy pieces of functionality specific to this project.
 
 
 ## Key Integrations
@@ -23,7 +23,7 @@ This could be a detailed release/go-live checklist.
 
 ## Major Changes
 ### eg, deprecated stuff etc
-For example "We've removed DMS from the composer file and added it to the project in order to address the Object issue in php7.3, seeing as the plugin cannot be upgraded without significant structureal changes."
+For example "We've removed DMS from the composer file and added it to the project in order to address the Object issue in php7.3, seeing as the plugin cannot be upgraded without significant structural changes."
 
 
 ## Cron Tasks
