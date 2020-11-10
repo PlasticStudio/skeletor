@@ -4,9 +4,6 @@
 // compiles into the necessary css files
 require('../scss/index.scss');
 
-// Bring in font-awesome via npm
-require('../../node_modules/@fortawesome/fontawesome-free/js/all.js');
-
 // Inject our components
 require('./components/navigation.js');
 require('./components/togglable-content.js');
