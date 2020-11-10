@@ -1,4 +1,5 @@
 // webpack.config.js
+const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
@@ -8,12 +9,17 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
 const output_dir = __dirname +"/app/production";
+//
+// console.log(process.env.NODE_ENV);
 
 module.exports = {
-	entry: "./app/js/index.js",
+	entry: {
+		index: "./app/js/index.js",
+		editor: "./app/scss/cms/_editor.scss"
+	},
 	output: {
 		path: output_dir,
-		filename: (devMode ? 'index.js' : 'index.min.js')
+		filename: '[name].js'
 	},
 	devtool: (devMode ? 'source-map' : false),
 	module: {
@@ -44,22 +50,27 @@ module.exports = {
 					MiniCssExtractPlugin.loader,
 					{
 						loader: 'css-loader',
-						options: { url: false },
+						options: { url: false, sourceMap: true },
 					},
 					'resolve-url-loader',
 					'postcss-loader',
 					{
 						loader: "sass-loader",
-						options: {}
+						options: {
+							sourceMap: true
+						}
 					}
 				]
 			},
 			{
 				test: require.resolve('jquery'),
-				exclude: [
-					/node_modules/
-				],
-				use: 'expose-loader?jQuery!expose?$'
+				use: [{
+					loader: 'expose-loader',
+					options: 'jQuery'
+				},{
+					loader: 'expose-loader',
+					options: '$'
+				}]
 			}
 		]
 	},
@@ -68,19 +79,29 @@ module.exports = {
 		aggregateTimeout: 300,
 		poll: 500
 	},
-	optimization: {
-		minimizer: [
-			new UglifyJsPlugin(),
-			new OptimizeCSSAssetsPlugin()
-		],
-	},
 	plugins: [
 		new FixStyleOnlyEntriesPlugin(),
 		new MiniCssExtractPlugin({
 			path: output_dir,
-			filename: (devMode ? 'index.css' : 'index.min.css'),
+			filename: '[name].css',
 			sourceMap: true
 		}),
 		new CleanWebpackPlugin(),
-	]
+		new webpack.ProvidePlugin({
+			$: "jquery",
+			jQuery: "jquery",
+			"window.jQuery": "jquery"
+		})
+	],
+	optimization: {
+		minimize: !devMode,
+		minimizer: [
+			new UglifyJsPlugin({
+				cache: true,
+				parallel: true,
+				sourceMap: true
+			}),
+			new OptimizeCSSAssetsPlugin({})
+		]
+	}
 };
