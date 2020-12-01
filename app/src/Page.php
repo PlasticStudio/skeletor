@@ -64,18 +64,18 @@ class Page extends SiteTree {
 
 
 	/**
-	 * Get a page link by classname
+	 * Get a page link by ClassName
 	 * Returns the *first* page instance's link by class
 	 *
 	 * @param String $class_name
 	 * @return String
 	 **/
-	public function PageLink($class_name){
-		if ($page = $class_name::get()->first()){
-			return $page->Link();
+	public function PageLink($class_name)
+	{
+		if ($page = SiteTree::get()->Filter('ClassName',$class_name)->first()) {
+			return $page->Link();			
 		}
-
-		return null;
+		return false;
 	}
 
 	/**

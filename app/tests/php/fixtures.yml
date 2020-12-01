@@ -7,7 +7,7 @@ ContactPage:
     Title: "Contact"
     URLSegment: "contact"
     ParentID: =>Page.about_us   
-HomePage:
-  home:
-    Title: "Home"
-    URLSegment: "home"
+# HomePage:
+#   home:
+#     Title: "Home"
+#     URLSegment: "home"
