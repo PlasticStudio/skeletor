@@ -1,0 +1,13 @@
+Page:
+  about_us:
+    Title: "About Us"
+    URLSegment: "about-us"
+ContactPage:
+  contact:
+    Title: "Contact"
+    URLSegment: "contact"
+    ParentID: =>Page.about_us   
+HomePage:
+  home:
+    Title: "Home"
+    URLSegment: "home"
