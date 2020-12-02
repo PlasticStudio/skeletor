@@ -35,8 +35,8 @@ default:
               - '--disable-gpu'
               - '--no-sandbox'
       browser_name: chrome
-      files_path: '%paths.modules.app%/tests/behat/resources/assets'
+      # files_path: '%paths.modules.app%/tests/behat/resources/assets'
     SilverStripe\BehatExtension\Extension:
       screenshot_path: '%paths.base%/silverstripe-cache/artifacts'
-      ajax_timeout: 10000
+      # ajax_timeout: 10000
       retry_seconds: 4 # default is 2      

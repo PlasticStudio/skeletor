@@ -16,7 +16,10 @@ Feature: Interact with ContactForm page
     Given I go to "/about-us/contact"
 
     #  STEP 1
-    Then I should see "Get Connected"
-    And I should see "Let's get started"
-    And I take a screenshot with name "getconnectedform_step1"
-    When I click the element ".button__text"
+    Then I should see "Contact Us"
+    And I should see "Name"
+    And I should see "Email"
+    And I should see "Phone"
+    And I should see "Message"
+    And I take a screenshot with name "contactform_load"
+    # When I click the element ".button__text"
