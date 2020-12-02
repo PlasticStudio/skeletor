@@ -1,13 +1,30 @@
+SilverStripe\Assets\Folder:
+  banner_images:
+    Name: banner-images
+    Title: banner-images
+SilverStripe\Assets\Image:
+  about_us_banner:
+    Name: about-us-banner.jpg
+    Filename: banner-images/about-us-banner.jpg
+    # PopulateFileFrom: app/tests/fixtures/assets/files.png
+    ParentID: =>SilverStripe\Assets\Folder.banner_images
+    # PageID: =>Page.about_us
+    
 Page:
   about_us:
     Title: "About Us"
     URLSegment: "about-us"
-ContactPage:
-  contact:
-    Title: "Contact"
-    URLSegment: "contact"
-    ParentID: =>Page.about_us   
+    MetaTitle: "About Us Page"
+    BannerImage: =>SilverStripe\Assets\Image.about_us_banner
 # HomePage:
 #   home:
 #     Title: "Home"
 #     URLSegment: "home"
+
+
+    
+ContactPage:
+  contact:
+    Title: "Contact"
+    URLSegment: "contact"
+    ParentID: =>Page.about_us

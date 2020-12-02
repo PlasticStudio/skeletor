@@ -27,14 +27,21 @@ class PageTest extends SapphireTest
     {
         $obj = $this->objFromFixture('ContactPage', 'contact');
         $this->assertEquals($obj->Link(), $this->page->PageLink($obj->ClassName));
-        $this->assertNull($this->page->PageLink('HomePage'));
-        $this->assertNull($this->page->PageLink('BogusClassName'));
+        $this->assertFalse($this->page->PageLink('HomePage'));
+        $this->assertFalse($this->page->PageLink('BogusClassName'));
     }
 
-    // public function testInherited()
-    // {
-    //     $obj = $this->objFromFixture('ContactPage', 'contact');
-    //     $this->assertEquals($obj->Link(), $this->page->PageLink($obj->ClassName));
-    // }
+    public function testInherited()
+    {
+        $page = $this->objFromFixture('ContactPage', 'contact');
+
+        $obj = $page->Inherited('BannerImage');
+        // $this->assertObjectHasAttribute('Name', $obj);
+        $this->assertEquals('about-us-banner.jpg', $obj->Name);
+        
+        $this->assertEquals('About Us Page', $page->Inherited('MetaTitle'));
+
+        $this->assertNull($page->Inherited('BogusProperty'));
+    }
 
 }

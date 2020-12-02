@@ -1,10 +1,11 @@
 <?php
 
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Assets\Image;
+use SilverStripe\Forms\TextField;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 
 class Page extends SiteTree {
@@ -48,7 +49,8 @@ class Page extends SiteTree {
 	 * @param String $property
 	 * @return Array
 	 **/
-	public function Inherited($property = null){
+	public function Inherited($property = null)
+	{
 		$page = $this;
 
 		// Identify whether the requested property is a property or a method()
