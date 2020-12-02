@@ -1,17 +1,18 @@
 <?php
 
-use SilverStripe\Control\HTTPRequest;
-use SilverStripe\Core\Injector\Injector;
-use SilverStripe\Forms\EmailField;
-use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
-use SilverStripe\Forms\RequiredFields;
-use SilverStripe\Forms\TextField;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 
-class ContactPage_Controller extends PageController {
+class ContactPageController extends PageController {
 
     private static $allowed_actions = [
 		'Form',

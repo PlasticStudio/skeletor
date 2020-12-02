@@ -19,12 +19,10 @@ Page:
 # HomePage:
 #   home:
 #     Title: "Home"
-#     URLSegment: "home"
-
-
-    
+#     URLSegment: "home"  
 ContactPage:
   contact:
     Title: "Contact"
     URLSegment: "contact"
+    SuccessMessage: "<p>Thanks for your submission. We'll be in touch soon.</p>"
     ParentID: =>Page.about_us

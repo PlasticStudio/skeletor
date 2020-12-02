@@ -23,7 +23,8 @@ class Page extends SiteTree {
 		'BannerImage'
 	];
 
-	public function getCMSFields(){
+	public function getCMSFields()
+	{
 		$fields = parent::getCMSFields();
 
 		if ($this->ClassName != 'SilverStripe\CMS\Model\RedirectorPage' ) {
