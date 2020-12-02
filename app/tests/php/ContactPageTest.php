@@ -13,7 +13,6 @@ use SilverStripe\Core\Injector\Injector;
 class ContactPageTest extends FunctionalTest
 {
     protected static $fixture_file = 'fixtures.yml';
-    private $params;
     private $page;
     private $form;
 
@@ -26,20 +25,6 @@ class ContactPageTest extends FunctionalTest
         $obj->publishRecursive();
         $this->page = $obj;
         $this->form = Injector::inst()->get(ContactPageController::class);
-        // parent::setUp();
-        //$this->dummy_submission_data = file_get_contents(BASE_PATH . '/app/tests/php/CIW/dummy_submission_data.json');
-        // $request = Injector::inst()->get(
-        //     HTTPRequest::class,
-        //     true,
-        //     [
-        //         'GET',
-        //         $this->objFromFixture(ContactPage::class, 'contact')->absoluteLink(),
-        //         ['ID' => 123]
-        //     ]
-        // );
-        // $this->params = $request->getVars();
-        
-        // $this->form = singleton(ContactPageController::class);
     }
 
     protected function tearDown()
@@ -57,21 +42,17 @@ class ContactPageTest extends FunctionalTest
 
     public function testContactForm() 
     {
-        $page = $this->get($this->page->absoluteLink());
-        $this->assertEquals(200, $page->getStatusCode());
-
-        // We should see a contact form
+        $this->get($this->page->absoluteLink());
         $this->submitForm(
             'Form_Form', 
             null, 
             [
                 'Name' => 'Mariah Carey',
-                'Email' => 'test_example_com',
+                'Email' => 'test_example_com', // invalid email address, should give an error message
                 'Phone' => '04 1234567',
                 'Message' => 'All I want for Christmas is you.'
             ]
         );
-        // invalid email address, should now see an error message
         $this->assertExactHTMLMatchBySelector(
             "#Form_Form_Email_Holder span.validation", 
             ['<span class="message validation">Please enter an email address</span>']
@@ -82,7 +63,7 @@ class ContactPageTest extends FunctionalTest
             null, 
             [
                 'Name' => 'Mariah Carey',
-                'Email' => 'test@example.com',
+                'Email' => 'test@example.com', // valid email address
                 'Phone' => '04 1234567',
                 'Message' => 'All I want for Christmas is you.'
             ]
@@ -91,7 +72,6 @@ class ContactPageTest extends FunctionalTest
             ".contact-form p", 
             ["<p>Thanks for your submission. We'll be in touch soon.</p>"]
         );
-
     }
 
 }

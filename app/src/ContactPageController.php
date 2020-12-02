@@ -26,29 +26,24 @@ class ContactPageController extends PageController {
 
 	public function Form()
 	{
-
 		if ($this->Submitted()) {
-			//convert to DBHTMLText object to render html
 			return DBHTMLText::create()->setValue($this->SuccessMessage);
-			
-		} else {
-			$fields = FieldList::create(
-				TextField::create('Name', 'Name'),
-				EmailField::create('Email', 'Email'),
-				TextField::create('Phone', 'Phone'),
-				TextareaField::create('Message', 'Message')
-			);
-
-			$actions = FieldList::create(
-				FormAction::create('doForm', 'Submit')
-			);
-
-			$validator = RequiredFields::create('Name', 'Email','Phone', 'Message');
-
-			$form = Form::create($this, 'Form', $fields, $actions, $validator)->addExtraClass('contact-form');
-
-			return $form;
 		}
+
+		$fields = FieldList::create(
+			TextField::create('Name', 'Name'),
+			EmailField::create('Email', 'Email'),
+			TextField::create('Phone', 'Phone'),
+			TextareaField::create('Message', 'Message')
+		);
+
+		$actions = FieldList::create(
+			FormAction::create('doForm', 'Submit')
+		);
+
+		$validator = RequiredFields::create('Name', 'Email','Phone', 'Message');
+
+		return Form::create($this, 'Form', $fields, $actions, $validator)->addExtraClass('contact-form');
 	}
 
 	public function doForm($data)
@@ -61,8 +56,9 @@ class ContactPageController extends PageController {
         $submission->SendEmail();
 
         // check if send confirmation email is set
-		if($this->SendCustomerEmail == true )
+		if ($this->SendCustomerEmail == true ) {
 			$submission->SendConfirmationEmail();
+		}
 
 		//set submission session and redirect submitter
 		$request = Injector::inst()->get(HTTPRequest::class);
