@@ -19,13 +19,15 @@ class ContactPageController extends PageController {
 		'submitted'
 	];
 
-    public function init(){
+	public function init()
+	{
         parent::init();
     }
 
-	public function Form(){
+	public function Form()
+	{
 
-		if($this->Submitted()) {
+		if ($this->Submitted()) {
 			//convert to DBHTMLText object to render html
 			return DBHTMLText::create()->setValue($this->SuccessMessage);
 			
@@ -49,7 +51,8 @@ class ContactPageController extends PageController {
 		}
 	}
 
-    public function doForm($data) {
+	public function doForm($data)
+	{
 		$submission = FormSubmission::create();
 		$submission->Payload = json_encode($data);
 		$submission->OriginID = $this->ID;
