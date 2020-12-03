@@ -26,5 +26,5 @@ ContactPage:
     URLSegment: "contact"
     Recipients: "test@example.com,test2@example.com"
     FromEmail: "noreply@example.com"
-    SuccessMessage: "<p>Thanks for your submission. We'll be in touch soon.</p>"
+    SuccessMessage: <p class="contact-form-success">Thanks for your submission. We'll be in touch soon.</p>
     ParentID: =>Page.about_us

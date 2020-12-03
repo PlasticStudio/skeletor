@@ -69,8 +69,8 @@ class ContactPageTest extends FunctionalTest
             ]
         );
         $this->assertExactHTMLMatchBySelector(
-            ".contact-form p", 
-            ["<p>Thanks for your submission. We'll be in touch soon.</p>"]
+            ".contact-form p.contact-form-success", 
+            ['<p class="contact-form-success">Thanks for your submission. We\'ll be in touch soon.</p>']
         );
     }
 

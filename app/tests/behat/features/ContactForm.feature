@@ -9,17 +9,26 @@ Feature: Interact with ContactForm page
 
   Background:
     Given I populate default records
-    And I resize window "1400" by "1600"
+    And I resize window "1400" by "1200"
 
   @javascript
   Scenario: Fill out Contact Form
     Given I go to "/about-us/contact"
-
-    #  STEP 1
-    Then I should see "Contact Us"
+    Then I should see "Contact"
     And I should see "Name"
     And I should see "Email"
     And I should see "Phone"
     And I should see "Message"
     And I take a screenshot with name "contactform_load"
-    # When I click the element ".button__text"
+    
+    When fill in the following:
+      | Name | Mariah Carey |
+      | Email | test@example.com |
+      | Phone | 04 1234567 |
+      | Message | All I want for Christmas is you. |
+    Then I take a screenshot with name "contactform_populated"
+
+    When I click the element "#Form_Form_action_doForm"
+    Then I should see "Thanks for your submission. We'll be in touch soon."
+    And I take a screenshot with name "contactform_submitted"
+ 

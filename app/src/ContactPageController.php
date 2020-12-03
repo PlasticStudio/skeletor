@@ -71,7 +71,8 @@ class ContactPageController extends PageController {
      * checks if session has a form submission
      * @return  bool
      */
-    public function Submitted() {
+	public function Submitted()
+	{
 		$request = Injector::inst()->get(HTTPRequest::class);
 		$session = $request->getSession();
 

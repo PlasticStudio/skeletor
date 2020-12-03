@@ -11,4 +11,3 @@ DNADesign\Populate\Populate:
   truncate_objects:
     - Page
     - SilverStripe\Assets\File
-    - InformationContent
