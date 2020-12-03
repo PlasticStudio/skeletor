@@ -23,12 +23,18 @@ Feature: Interact with ContactForm page
     
     When fill in the following:
       | Name | Mariah Carey |
-      | Email | test@example.com |
+      | Email | test_example_com |
       | Phone | 04 1234567 |
       | Message | All I want for Christmas is you. |
-    Then I take a screenshot with name "contactform_populated"
+    And I click the element "#Form_Form_action_doForm"
+    # Difficult to check for validation here, because the browser does its own html5 validation on fields
+    # so we can instead check that the success message does not appear
+    Then I should not see "Thanks for your submission. We'll be in touch soon."
+    And I take a screenshot with name "contactform_populated_invalid_email"
 
-    When I click the element "#Form_Form_action_doForm"
+    When fill in "Email" with "test@example.com"
+    And I take a screenshot with name "contactform_populated"
+    And I click the element "#Form_Form_action_doForm"
     Then I should see "Thanks for your submission. We'll be in touch soon."
     And I take a screenshot with name "contactform_submitted"
  
