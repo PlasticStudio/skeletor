@@ -4,10 +4,6 @@ Page:
     URLSegment: "about-us"
     MetaTitle: "About Us Page"
     BannerImage: =>SilverStripe\Assets\Image.about_us_banner
-# HomePage:
-#   home:
-#     Title: "Home"
-#     URLSegment: "home"  
 ContactPage:
   contact:
     Title: "Contact"

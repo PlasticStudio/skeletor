@@ -41,6 +41,19 @@ class Page extends SiteTree {
 		return $fields;
 	}
 
+	/**
+	 * Get this object's controller
+	 * @return obj
+	 */
+	public function MyController()
+	{
+		$class = $this->ClassName . "Controller";
+		if (class_exists($class)) {
+			return new $class();
+		}
+		return false;
+	}
+
 
 	/**
 	 * Get an inherited 'thing'
@@ -67,15 +80,30 @@ class Page extends SiteTree {
 
 
 	/**
-	 * Get a page link by ClassName
-	 * Returns the *first* page instance's link by class
+	 * Get a page type by ClassName
+	 * Returns the *first* page instance of this ClassName
 	 *
-	 * @param String $class_name
-	 * @return String
+	 * @param string $class_name
+	 * @return object
+	 **/
+	public function PageType($class_name)
+	{
+		if ($page = SiteTree::get()->Filter('ClassName',$class_name)->first()) {
+			return $page;			
+		}
+		return false;
+	}
+
+
+	/**
+	 * Get a page link by ClassName
+	 *
+	 * @param string $class_name
+	 * @return string page link
 	 **/
 	public function PageLink($class_name)
 	{
-		if ($page = SiteTree::get()->Filter('ClassName',$class_name)->first()) {
+		if ($page = $this->PageType($class_name)) {
 			return $page->Link();			
 		}
 		return false;

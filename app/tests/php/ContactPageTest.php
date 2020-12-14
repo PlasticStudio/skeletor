@@ -1,11 +1,7 @@
 <?php
 
 use SilverStripe\Dev\Debug;
-use SilverStripe\ORM\ArrayList;
-use SilverStripe\Control\Controller;
 use SilverStripe\Dev\FunctionalTest;
-use SilverStripe\Forms\LiteralField;
-use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Injector\Injector;
 
 // vendor/bin/phpunit app/tests/php/ContactPageTest.php
@@ -14,7 +10,7 @@ class ContactPageTest extends FunctionalTest
 {
     protected static $fixture_file = 'fixtures.yml';
     private $page;
-    private $form;
+    //private $form;
 
     protected function setUp()
     {
@@ -24,13 +20,13 @@ class ContactPageTest extends FunctionalTest
         $obj = $this->objFromFixture(ContactPage::class, 'contact');
         $obj->publishRecursive();
         $this->page = $obj;
-        $this->form = Injector::inst()->get(ContactPageController::class);
+        //$this->form = Injector::inst()->get(ContactPageController::class);
     }
 
     protected function tearDown()
     {
         $this->page = null;
-        $this->form = null;
+        //$this->form = null;
         parent::tearDown();
     }
 
