@@ -10,7 +10,6 @@ class ContactPageTest extends FunctionalTest
 {
     protected static $fixture_file = 'fixtures.yml';
     private $page;
-    //private $form;
 
     protected function setUp()
     {
@@ -20,13 +19,11 @@ class ContactPageTest extends FunctionalTest
         $obj = $this->objFromFixture(ContactPage::class, 'contact');
         $obj->publishRecursive();
         $this->page = $obj;
-        //$this->form = Injector::inst()->get(ContactPageController::class);
     }
 
     protected function tearDown()
     {
         $this->page = null;
-        //$this->form = null;
         parent::tearDown();
     }
 

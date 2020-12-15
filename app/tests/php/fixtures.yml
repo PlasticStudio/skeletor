@@ -2,14 +2,22 @@ SilverStripe\Assets\Folder:
   banner_images:
     Name: banner-images
     Title: banner-images
+  global_assets:
+    Name: global-assets
+    Title: global-assets
 SilverStripe\Assets\Image:
   about_us_banner:
     Name: about-us-banner.jpg
     Filename: banner-images/about-us-banner.jpg
-    # PopulateFileFrom: app/tests/fixtures/assets/files.png
     ParentID: =>SilverStripe\Assets\Folder.banner_images
-    # PageID: =>Page.about_us
-    
+  site_logo: 
+    Name: logo.jpg
+    Filename: global-assets/logo.jpg
+    ParentID: =>SilverStripe\Assets\Folder.global_assets
+SiteConfig:
+  site_config:
+    Title: "Pretty good site config"
+    # Logo: =>SilverStripe\Assets\Image.site_logo   
 Page:
   about_us:
     Title: "About Us"

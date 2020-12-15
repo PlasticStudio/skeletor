@@ -4,7 +4,6 @@ use SilverStripe\Assets\Image;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextAreaField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
@@ -13,7 +12,7 @@ use SilverStripe\Core\Environment;
 class SiteConfigExtension extends DataExtension {
 
 	private static $db = [
-		'EmailRecipients' 	=> 'Text'
+		'EmailRecipients' => 'Text'
 	];
 
 	private static $has_one = [
@@ -24,15 +23,16 @@ class SiteConfigExtension extends DataExtension {
 		'Logo'
 	];
 
-
-	public function updateCMSFields(FieldList $fields){
-
-		$fields->addFieldToTab('Root.Main', UploadField::create('Logo', 'Site logo')->setDescription('Default logo for email templates and shared links on social media'));
+	public function updateCMSFields(FieldList $fields)
+	{
+		$fields->addFieldToTab('Root.Main', UploadField::create('Logo', 'Site logo')
+			->setDescription('Default logo for email templates and shared links on social media'));
         $fields->addFieldToTab('Root.Main', HeaderField::create('Email','Email settings', 2));
-        $fields->addFieldToTab('Root.Main', TextField::create('EmailRecipients','Default recipients')->setDescription('Email addresses to send all website emails <strong>to</strong> (comma-separated list)'));
-		$fields->addFieldToTab('Root.Main', ReadonlyField::create('EmailFrom_Display','Send all emails from', $this->EmailFrom())->setDescription('This cannot be edited as it needs to be a validated, environment-specific email address.'));
+		$fields->addFieldToTab('Root.Main', TextField::create('EmailRecipients','Default recipients')
+			->setDescription('Email addresses to send all website emails <strong>to</strong> (comma-separated list)'));
+		$fields->addFieldToTab('Root.Main', ReadonlyField::create('EmailFrom_Display','Send all emails from', $this->EmailFrom())
+			->setDescription('This cannot be edited as it needs to be a validated, environment-specific email address.'));
 	}
-
 
 	/**
 	 * Calculate what the sender's email is
@@ -48,7 +48,6 @@ class SiteConfigExtension extends DataExtension {
 		return "noreply@plasticstudio.co";
 	}
 
-
 	/**
 	 * Prepare the email recipient(s)
 	 * This is managed in the CMS, but comma-separated values need to be exploded
@@ -59,4 +58,5 @@ class SiteConfigExtension extends DataExtension {
 	public function EmailRecipients(){
 		return str_getcsv($this->owner->EmailRecipients, ',');
 	}
+
 }

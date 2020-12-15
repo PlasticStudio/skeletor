@@ -54,7 +54,6 @@ class Page extends SiteTree {
 		return false;
 	}
 
-
 	/**
 	 * Get an inherited 'thing'
 	 * This multi-purpose method allows us to iterate up the site tree to get a property or method.
@@ -94,7 +93,6 @@ class Page extends SiteTree {
 		return false;
 	}
 
-
 	/**
 	 * Get a page link by ClassName
 	 *
@@ -112,10 +110,19 @@ class Page extends SiteTree {
 	/**
 	 * Get logo set in site config if it exists
 	 **/
-	public function Logo(){
-		if ($Logo = SiteConfig::current_site_config()->Logo()){
-			return $Logo;
-		}
+	public function Logo()
+	{
+		// if ($logo = SiteConfig::current_site_config()->Logo()) {
+		// 	return $logo;
+		// }
+		// return false;
+		return $this->getLogoFromSiteConfig(SiteConfig::current_site_config());
+	}
+
+	public function getLogoFromSiteConfig($site_config)
+	{
+		if (!method_exists($site_config, 'Logo')) return false;
+		if ($logo = $site_config->Logo()) return $logo;
 		return false;
 	}
 	
@@ -127,9 +134,10 @@ class Page extends SiteTree {
 	 * For instance, a news item may have a featured image, so on
 	 * that page class this function could return the featured image.
 	 **/
-	public function OgImage(){
-		if ($Image = $this->Logo()){
-			return $Image;
+	public function OgImage()
+	{
+		if ($image = $this->Logo()) {
+			return $image;
 		}
 		return false;
 	}
