@@ -1,14 +1,23 @@
 <?php
 
+namespace App\Tests;
+
+use Page;
 use SilverStripe\Dev\Debug;
+use App\Tests\PageTestSiteConfig;
 use SilverStripe\Dev\FunctionalTest;
-use SilverStripe\Core\Injector\Injector;
 
 // vendor/bin/phpunit app/tests/php/ContactPageTest.php
 
 class ContactPageTest extends FunctionalTest
 {
     protected static $fixture_file = 'fixtures.yml';
+    // Even thogh we're not using PageTestSiteConfig in this file, 
+    // we still need to declare it as an extra dataobject, because we are
+    // sharing the fixture file with  PageTest, which does use it
+    protected static $extra_dataobjects = [
+        PageTestSiteConfig::class 
+    ]; 
     private $page;
 
     protected function setUp()
@@ -16,7 +25,7 @@ class ContactPageTest extends FunctionalTest
         parent::setUp();
         $parent_obj = $this->objFromFixture(Page::class, 'about_us');
         $parent_obj->publishRecursive();
-        $obj = $this->objFromFixture(ContactPage::class, 'contact');
+        $obj = $this->objFromFixture('App\ContactPage', 'contact');
         $obj->publishRecursive();
         $this->page = $obj;
     }
@@ -62,7 +71,7 @@ class ContactPageTest extends FunctionalTest
             ]
         );
         $this->assertExactHTMLMatchBySelector(
-            ".contact-form p.contact-form-success", 
+            "p.contact-form-success", 
             ['<p class="contact-form-success">Thanks for your submission. We\'ll be in touch soon.</p>']
         );
     }

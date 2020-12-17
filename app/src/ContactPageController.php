@@ -1,5 +1,10 @@
 <?php
 
+namespace App;
+
+use PageController;
+use App\FormSubmission;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
@@ -26,7 +31,7 @@ class ContactPageController extends PageController {
 
 	public function Form()
 	{
-		if ($this->Submitted()) {
+		if ($this->FormSubmitted()) {
 			return DBHTMLText::create()->setValue($this->SuccessMessage);
 		}
 
@@ -60,27 +65,16 @@ class ContactPageController extends PageController {
 			$submission->SendConfirmationEmail();
 		}
 
-		//set submission session and redirect submitter
-		$request = Injector::inst()->get(HTTPRequest::class);
-		$session = $request->getSession();
-		$session->set($this->ClassName.'_Form_Sent',true);
-        $this->redirect($this->Link());      
+		$this->redirect($this->Link('submitted')); 
     }
 
     /**
      * checks if session has a form submission
      * @return  bool
      */
-	public function Submitted()
+	public function FormSubmitted()
 	{
-		$request = Injector::inst()->get(HTTPRequest::class);
-		$session = $request->getSession();
-
-		if( $session->get($this->ClassName.'_Form_Sent') ){
-			$session->clear($this->ClassName.'_Form_Sent');
-			return true;
-		}
-
-		return false;
+		$params = $this->getRequest()->params();
+		return (isset($params['Action']) && $params['Action'] == 'submitted');
 	}
 }

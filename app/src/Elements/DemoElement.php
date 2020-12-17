@@ -1,6 +1,6 @@
 <?php
 
-namespace Skeletor\Elemental;
+namespace App\Elemental;
 
 use DNADesign\Elemental\Models\BaseElement;
 use SilverStripe\Forms\TextareaField;

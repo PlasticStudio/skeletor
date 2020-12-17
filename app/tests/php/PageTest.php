@@ -1,20 +1,25 @@
 <?php
 
-use SilverStripe\Dev\Debug;
-use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Core\Injector\Injector;
-use Project\Tests\PageTest_SiteConfig;
+namespace App\Tests;
 
+use Page;
+use App\HomePage;
+use PageController;
+use SilverStripe\Dev\Debug;
+use App\Tests\PageTestSiteConfig;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Core\Injector\Injector;
 
 // vendor/bin/phpunit app/tests/php/PageTest.php
 
 class PageTest extends SapphireTest
 {
     protected static $fixture_file = 'fixtures.yml';
-    // protected $usesDatabase = true;
-    // protected static $extra_dataobjects = [
-    //     PageTestSiteConfig::class
-    // ]; 
+    protected $usesDatabase = true;
+    protected static $extra_dataobjects = [
+        PageTestSiteConfig::class
+    ]; 
     private $page;
 
     protected function setUp()
@@ -39,7 +44,7 @@ class PageTest extends SapphireTest
 
     public function testPageType()
     {
-        $obj = $this->objFromFixture('ContactPage', 'contact');
+        $obj = $this->objFromFixture('App\ContactPage', 'contact');
         $this->assertEquals($obj->ClassName, $this->page->PageType($obj->ClassName)->ClassName);
         $this->assertFalse($this->page->PageType('HomePage'));
         $this->assertFalse($this->page->PageType('BogusClassName'));
@@ -47,7 +52,7 @@ class PageTest extends SapphireTest
 
     public function testPageLink()
     {
-        $obj = $this->objFromFixture('ContactPage', 'contact');
+        $obj = $this->objFromFixture('App\ContactPage', 'contact');
         $this->assertEquals($obj->Link(), $this->page->PageLink($obj->ClassName));
         $this->assertFalse($this->page->PageLink('HomePage'));
         $this->assertFalse($this->page->PageLink('BogusClassName'));
@@ -55,7 +60,7 @@ class PageTest extends SapphireTest
 
     public function testInherited()
     {
-        $page = $this->objFromFixture('ContactPage', 'contact');
+        $page = $this->objFromFixture('App\ContactPage', 'contact');
         $obj = $page->Inherited('BannerImage');
         // $this->assertObjectHasAttribute('Name', $obj);
         $this->assertEquals('about-us-banner.jpg', $obj->Name);
@@ -65,14 +70,9 @@ class PageTest extends SapphireTest
 
     public function testGetLogoFromSiteConfig()
     {
-        $page = $this->objFromFixture('Page', 'about_us');
-        $site_config = $this->objFromFixture('SiteConfig', 'site_config');
-        $this->assertEquals("Pretty good site config", $site_config->Title);
-        // $logo = $this->objFromFixture('SilverStripe\Assets\Image', 'site_logo');
-        // $this->assertNotFalse($page->Logo());
-        // $this->assertEquals($logo->Name, $page->Logo()->Name);
-        // $this->assertFalse($this->page->PageLink('HomePage'));
-        // $this->assertFalse($this->page->PageLink('BogusClassName'));
+        // $site_config = $this->objFromFixture('App\Tests\PageTestSiteConfig', 'site_config');
+        $logo = $this->objFromFixture('SilverStripe\Assets\Image', 'site_logo');
+        $this->assertEquals($logo->Name, $this->page->getLogoFromSiteConfig(SiteConfig::current_site_config())->Name);
     }
 
 }

@@ -14,21 +14,17 @@ SilverStripe\Assets\Image:
     Name: logo.jpg
     Filename: global-assets/logo.jpg
     ParentID: =>SilverStripe\Assets\Folder.global_assets
-SiteConfig:
+App\Tests\PageTestSiteConfig:
   site_config:
     Title: "Pretty good site config"
-    # Logo: =>SilverStripe\Assets\Image.site_logo   
+    Logo: =>SilverStripe\Assets\Image.site_logo   
 Page:
   about_us:
     Title: "About Us"
     URLSegment: "about-us"
     MetaTitle: "About Us Page"
-    BannerImage: =>SilverStripe\Assets\Image.about_us_banner
-# HomePage:
-#   home:
-#     Title: "Home"
-#     URLSegment: "home"  
-ContactPage:
+    BannerImage: =>SilverStripe\Assets\Image.about_us_banner 
+App\ContactPage:
   contact:
     Title: "Contact"
     URLSegment: "contact"

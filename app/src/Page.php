@@ -10,6 +10,8 @@ use SilverStripe\AssetAdmin\Forms\UploadField;
 
 class Page extends SiteTree {
 
+	private static $table_name = 'Page';
+
 	private static $db = [
 		'MetaTitle' 	=> 'Text',
 		'MetaKeywords' 	=> 'Text'
@@ -112,16 +114,11 @@ class Page extends SiteTree {
 	 **/
 	public function Logo()
 	{
-		// if ($logo = SiteConfig::current_site_config()->Logo()) {
-		// 	return $logo;
-		// }
-		// return false;
 		return $this->getLogoFromSiteConfig(SiteConfig::current_site_config());
 	}
 
 	public function getLogoFromSiteConfig($site_config)
 	{
-		if (!method_exists($site_config, 'Logo')) return false;
 		if ($logo = $site_config->Logo()) return $logo;
 		return false;
 	}

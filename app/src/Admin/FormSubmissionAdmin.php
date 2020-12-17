@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 use SilverStripe\Admin\ModelAdmin;
 
 class FormSubmissionAdmin extends ModelAdmin {

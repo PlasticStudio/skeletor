@@ -1,4 +1,7 @@
 <?php
+
+namespace App;
+
 use SilverStripe\ORM\DataObject;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextareaField;
@@ -20,6 +23,7 @@ class FormSubmission extends DataObject {
 	private static $plural_name = 'Form submissions';
 	private static $description = 'The submission data record for all form submissions';
 	private static $default_sort = 'Created DESC';
+	private static $table_name = 'FormSubmission';
 
 	private static $db = [
 		'Payload' 	=> 'Text',
