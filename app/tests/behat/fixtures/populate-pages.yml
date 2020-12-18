@@ -4,7 +4,7 @@ Page:
     URLSegment: "about-us"
     MetaTitle: "About Us Page"
     BannerImage: =>SilverStripe\Assets\Image.about_us_banner
-App\ContactPage:
+Skeletor\Pages\ContactPage:
   contact:
     Title: "Contact"
     URLSegment: "contact"
