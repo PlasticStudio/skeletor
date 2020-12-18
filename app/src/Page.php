@@ -49,6 +49,7 @@ class Page extends SiteTree {
 	 */
 	public function MyController()
 	{
+		//todo
 		$class = $this->ClassName . "Controller";
 		if (class_exists($class)) {
 			return new $class();

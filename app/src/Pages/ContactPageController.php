@@ -1,9 +1,9 @@
 <?php
 
-namespace App;
+namespace Skeletor\Pages;
 
 use PageController;
-use App\FormSubmission;
+use Skeletor\DataObjects\FormSubmission;
 use SilverStripe\Dev\Debug;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FieldList;
