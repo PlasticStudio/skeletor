@@ -1,13 +1,11 @@
 <?php
 
-namespace App;
+namespace Skeletor\Pages;
 
 use Page;
-use App\FormSubmission;
+use Skeletor\DataObjects\FormSubmission;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\EmailField;
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\TextareaField;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;

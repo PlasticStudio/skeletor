@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests;
+namespace Skeletor\Tests;
 
 use Page;
-use SilverStripe\Dev\Debug;
-use App\Tests\PageTestSiteConfig;
+use Skeletor\Tests\PageTestSiteConfig;
 use SilverStripe\Dev\FunctionalTest;
+use SilverStripe\Dev\Debug;
 
 // vendor/bin/phpunit app/tests/php/ContactPageTest.php
 
@@ -25,7 +25,7 @@ class ContactPageTest extends FunctionalTest
         parent::setUp();
         $parent_obj = $this->objFromFixture(Page::class, 'about_us');
         $parent_obj->publishRecursive();
-        $obj = $this->objFromFixture('App\ContactPage', 'contact');
+        $obj = $this->objFromFixture('Skeletor\Pages\ContactPage', 'contact');
         $obj->publishRecursive();
         $this->page = $obj;
     }

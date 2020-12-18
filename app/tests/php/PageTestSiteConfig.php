@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace Skeletor\Tests;
 
 use SilverStripe\Dev\TestOnly;
 use SilverStripe\Assets\Image;

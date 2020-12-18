@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Skeletor\Pages;
 
 use Page;
 class HomePage extends Page {

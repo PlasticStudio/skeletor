@@ -14,7 +14,7 @@ SilverStripe\Assets\Image:
     Name: logo.jpg
     Filename: global-assets/logo.jpg
     ParentID: =>SilverStripe\Assets\Folder.global_assets
-App\Tests\PageTestSiteConfig:
+Skeletor\Tests\PageTestSiteConfig:
   site_config:
     Title: "Pretty good site config"
     Logo: =>SilverStripe\Assets\Image.site_logo   
@@ -24,7 +24,7 @@ Page:
     URLSegment: "about-us"
     MetaTitle: "About Us Page"
     BannerImage: =>SilverStripe\Assets\Image.about_us_banner 
-App\ContactPage:
+Skeletor\Pages\ContactPage:
   contact:
     Title: "Contact"
     URLSegment: "contact"
