@@ -1,0 +1,42 @@
+# Note: Currently chrome latest is recommended
+# Behat test setup requires an `.env` with `SS_BASE_URL` defined, as well (SS_BASE_URL="http://localhost")
+# as each of the following commands to initiate a test run:
+# ========================================================================= #
+# composer require silverstripe/recipe-testing ^1
+# chromedriver
+# vendor/bin/behat app
+# ========================================================================= #
+default:
+  suites:
+    app:
+      paths:
+        - '%paths.modules.app%/tests/behat/features/'
+      contexts:
+        - FeatureContext
+        - SilverStripe\Framework\Tests\Behaviour\CmsFormsContext
+        - SilverStripe\Framework\Tests\Behaviour\CmsUiContext
+        - SilverStripe\BehatExtension\Context\BasicContext
+        - SilverStripe\BehatExtension\Context\EmailContext
+        - SilverStripe\BehatExtension\Context\LoginContext
+        -
+          SilverStripe\BehatExtension\Context\FixtureContext:
+            - '%paths.modules.framework%/tests/behat/features/files/'
+  extensions:
+    SilverStripe\BehatExtension\MinkExtension:
+      default_session: facebook_web_driver
+      javascript_session: facebook_web_driver
+      facebook_web_driver:
+        wd_host: "http://127.0.0.1:9515" #chromedriver port
+        browser: chrome
+        capabilities:
+          chrome:
+            switches:
+              - '--headless'
+              - '--disable-gpu'
+              - '--no-sandbox'
+      browser_name: chrome
+      # files_path: '%paths.modules.app%/tests/behat/resources/assets'
+    SilverStripe\BehatExtension\Extension:
+      screenshot_path: '%paths.base%/silverstripe-cache/artifacts'
+      # ajax_timeout: 10000
+      retry_seconds: 4 # default is 2      

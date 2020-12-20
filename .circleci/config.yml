@@ -1,0 +1,102 @@
+# PHP CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-php/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.3.23-apache-buster-node-browsers-legacy
+      - image: circleci/mysql:5.7-ram
+        environment:
+          - MYSQL_ROOT_PASSWORD: ''
+          - MYSQL_USER: admin
+          - MYSQL_PASSWORD: password
+          - MYSQL_DATABASE: skeletor
+          - MYSQL_HOST: '127.0.0.1'
+
+    working_directory: /var/www/html
+
+    steps:
+      - checkout
+      - run:
+          name: Install MySQL driver
+          command: |
+            sudo docker-php-ext-configure pdo_mysql --with-pdo-mysql=mysqlnd
+            sudo docker-php-ext-install zip bcmath pdo pdo_mysql mysqli
+            sudo apt-get install default-mysql-client
+            sudo apt-get install -y libtidy-dev 
+            sudo docker-php-ext-install -j$(nproc) tidy
+      - run:
+          # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      # Copy setup files
+      - run: mv .circleci/.env.circleci .env
+      - run: mkdir -p silverstripe-cache/artifacts
+
+      - run:
+          name: Reconfigure Apache virtual host
+          command: |
+            sudo cp .circleci/apache-host.conf /etc/apache2/sites-enabled/000-default.conf
+            echo "ServerName localhost" | sudo tee /etc/apache2/conf-available/servername.conf
+            sudo a2enconf servername
+            sudo a2enmod rewrite
+            sudo service apache2 restart
+      - run:
+          name: Start Chromedriver
+          command: chromedriver
+          background: true
+
+      # Download and cache dependencies
+      # composer cache
+      - restore_cache:
+          keys:
+            # "composer.json" can be used if "composer.json"
+            # is not committed to the repository.
+            - composer-v2-{{ checksum "composer.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - composer-v2-
+      # - run: sudo composer self-update --1
+      - run: composer install -n --prefer-dist
+      - run: composer vendor-expose
+      - save_cache:
+          key: composer-v2-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+            - resources
+
+      # prepare the database
+      - run: vendor/bin/sake dev/build flush=1
+
+      - run: sudo composer self-update --1
+      - run: composer install -n --prefer-dist
+      # run tests with phpunit
+      - run: vendor/bin/phpunit --log-junit silverstripe-cache/artifacts/junit.xml app/tests
+      # run Behat browser testing
+      - run: vendor/bin/behat --verbose @app --tags="~@todo" -f pretty -o std -f junit -o silverstripe-cache/artifacts
+
+      # Artifacts
+      - store_test_results:
+          path: silverstripe-cache/artifacts
+      - store_artifacts:
+          path: silverstripe-cache/artifacts
+
+      #- persist_to_workspace:
+      #    root: /var/
+      #    paths:
+      #     - www/html
+      #- attach_workspace:
+      #    at: /var/
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - build

@@ -8,11 +8,10 @@ class PageController extends ContentController {
 
 	private static $allowed_actions = [];
 
-	public function init() {
+	public function init() 
+	{
 		parent::init();
-
-			Requirements::css('app/production/index.css');
-			Requirements::javascript('app/production/index.js');
-
+		Requirements::css('app/production/index.css');
+		Requirements::javascript('app/production/index.js');
 	}
 }

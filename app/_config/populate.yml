@@ -1,0 +1,13 @@
+---
+Name: app_populate
+only:
+  ClassExists: DNADesign\Populate\Populate
+---
+
+DNADesign\Populate\Populate:
+  include_yaml_fixtures:
+    - app/tests/behat/fixtures/populate-assets.yml
+    - app/tests/behat/fixtures/populate-pages.yml
+  truncate_objects:
+    - Page
+    - SilverStripe\Assets\File

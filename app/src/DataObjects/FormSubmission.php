@@ -1,12 +1,10 @@
 <?php
+
+namespace Skeletor\DataObjects;
+
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\ReadonlyField;
-use SilverStripe\Forms\FormAction;
-use SilverStripe\Forms\Form;
-use SilverStripe\Forms\RequiredFields;
-use SilverStripe\Forms\HeaderField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use SilverStripe\Control\Email\Email;
@@ -20,6 +18,7 @@ class FormSubmission extends DataObject {
 	private static $plural_name = 'Form submissions';
 	private static $description = 'The submission data record for all form submissions';
 	private static $default_sort = 'Created DESC';
+	private static $table_name = 'FormSubmission';
 
 	private static $db = [
 		'Payload' 	=> 'Text',

@@ -1,0 +1,34 @@
+SilverStripe\Assets\Folder:
+  banner_images:
+    Name: banner-images
+    Title: banner-images
+  global_assets:
+    Name: global-assets
+    Title: global-assets
+SilverStripe\Assets\Image:
+  about_us_banner:
+    Name: about-us-banner.jpg
+    Filename: banner-images/about-us-banner.jpg
+    ParentID: =>SilverStripe\Assets\Folder.banner_images
+  site_logo: 
+    Name: logo.jpg
+    Filename: global-assets/logo.jpg
+    ParentID: =>SilverStripe\Assets\Folder.global_assets
+Skeletor\Tests\PageTestSiteConfig:
+  site_config:
+    Title: "Pretty good site config"
+    Logo: =>SilverStripe\Assets\Image.site_logo   
+Page:
+  about_us:
+    Title: "About Us"
+    URLSegment: "about-us"
+    MetaTitle: "About Us Page"
+    BannerImage: =>SilverStripe\Assets\Image.about_us_banner 
+Skeletor\Pages\ContactPage:
+  contact:
+    Title: "Contact"
+    URLSegment: "contact"
+    Recipients: "test@example.com,test2@example.com"
+    FromEmail: "noreply@example.com"
+    SuccessMessage: <p class="contact-form-success">Thanks for your submission. We'll be in touch soon.</p>
+    ParentID: =>Page.about_us

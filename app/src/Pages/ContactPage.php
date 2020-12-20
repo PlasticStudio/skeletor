@@ -1,18 +1,21 @@
 <?php
 
+namespace Skeletor\Pages;
+
+use Page;
+use Skeletor\DataObjects\FormSubmission;
 use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\EmailField;
-use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\CheckboxField;
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\HTMLEditor\HTMLEditorField;
 use SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor;
-use SilverStripe\SiteConfig\SiteConfig;
 
 class ContactPage extends Page {
 	
 	private static $description = 'Standard page with a contact form';
 	private static $icon_class = 'font-icon-p-book';
+	private static $table_name = 'ContactPage';
 
     private static $db = [
         'Recipients'		=> 'Varchar(1024)',
@@ -23,7 +26,7 @@ class ContactPage extends Page {
     ];
 
     private static $has_many = [
-        'Submissions' => 'FormSubmission'
+        'Submissions' => FormSubmission::class
     ];
 
     public function getCMSFields(){

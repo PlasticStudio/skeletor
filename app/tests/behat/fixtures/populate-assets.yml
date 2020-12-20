@@ -1,0 +1,9 @@
+SilverStripe\Assets\Folder:
+  banner_images:
+    Name: banner-images
+    Title: banner-images
+SilverStripe\Assets\Image:
+  about_us_banner:
+    Name: about-us-banner.jpg
+    Filename: banner-images/about-us-banner.jpg
+    ParentID: =>SilverStripe\Assets\Folder.banner_images

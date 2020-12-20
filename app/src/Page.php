@@ -1,13 +1,16 @@
 <?php
 
-use SilverStripe\Forms\TextField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\CMS\Model\SiteTree;
-use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Dev\Debug;
 use SilverStripe\Assets\Image;
+use SilverStripe\Forms\TextField;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 
 class Page extends SiteTree {
+
+	private static $table_name = 'Page';
 
 	private static $db = [
 		'MetaTitle' 	=> 'Text',
@@ -22,7 +25,8 @@ class Page extends SiteTree {
 		'BannerImage'
 	];
 
-	public function getCMSFields(){
+	public function getCMSFields()
+	{
 		$fields = parent::getCMSFields();
 
 		if ($this->ClassName != 'SilverStripe\CMS\Model\RedirectorPage' ) {
@@ -39,6 +43,19 @@ class Page extends SiteTree {
 		return $fields;
 	}
 
+	/**
+	 * Get this object's controller
+	 * @return obj
+	 */
+	public function MyController()
+	{
+		//todo
+		$class = $this->ClassName . "Controller";
+		if (class_exists($class)) {
+			return new $class();
+		}
+		return false;
+	}
 
 	/**
 	 * Get an inherited 'thing'
@@ -48,7 +65,8 @@ class Page extends SiteTree {
 	 * @param String $property
 	 * @return Array
 	 **/
-	public function Inherited($property = null){
+	public function Inherited($property = null)
+	{
 		$page = $this;
 
 		// Identify whether the requested property is a property or a method()
@@ -64,27 +82,45 @@ class Page extends SiteTree {
 
 
 	/**
-	 * Get a page link by classname
-	 * Returns the *first* page instance's link by class
+	 * Get a page type by ClassName
+	 * Returns the *first* page instance of this ClassName
 	 *
-	 * @param String $class_name
-	 * @return String
+	 * @param string $class_name
+	 * @return object
 	 **/
-	public function PageLink($class_name){
-		if ($page = $class_name::get()->first()){
-			return $page->Link();
+	public function PageType($class_name)
+	{
+		if ($page = SiteTree::get()->Filter('ClassName',$class_name)->first()) {
+			return $page;			
 		}
+		return false;
+	}
 
-		return null;
+	/**
+	 * Get a page link by ClassName
+	 *
+	 * @param string $class_name
+	 * @return string page link
+	 **/
+	public function PageLink($class_name)
+	{
+		if ($page = $this->PageType($class_name)) {
+			return $page->Link();			
+		}
+		return false;
 	}
 
 	/**
 	 * Get logo set in site config if it exists
 	 **/
-	public function Logo(){
-		if ($Logo = SiteConfig::current_site_config()->Logo()){
-			return $Logo;
-		}
+	public function Logo()
+	{
+		return $this->getLogoFromSiteConfig(SiteConfig::current_site_config());
+	}
+
+	public function getLogoFromSiteConfig($site_config)
+	{
+		if ($logo = $site_config->Logo()) return $logo;
 		return false;
 	}
 	
@@ -96,9 +132,10 @@ class Page extends SiteTree {
 	 * For instance, a news item may have a featured image, so on
 	 * that page class this function could return the featured image.
 	 **/
-	public function OgImage(){
-		if ($Image = $this->Logo()){
-			return $Image;
+	public function OgImage()
+	{
+		if ($image = $this->Logo()) {
+			return $image;
 		}
 		return false;
 	}

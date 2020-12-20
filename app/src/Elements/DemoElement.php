@@ -11,6 +11,7 @@ class DemoElement extends BaseElement {
 	private static $singular_name = 'Demo Element';
 	private static $description = 'Demo element to showcase namespaceing and core class methods.';
 	private static $icon = 'font-icon-p-a';
+	private static $table_name = 'DemoElement';
 
 	/*
 	 * For elements that are more complex (e.g. have a Gridfield) disable the
