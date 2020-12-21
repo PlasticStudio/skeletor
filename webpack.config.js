@@ -4,11 +4,12 @@ const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
-const output_dir = __dirname +"/app/production";
+const output_dir = __dirname +"/app/dist";
 //
 // console.log(process.env.NODE_ENV);
 
@@ -96,10 +97,10 @@ module.exports = {
 	optimization: {
 		minimize: !devMode,
 		minimizer: [
-			new UglifyJsPlugin({
-				cache: true,
+			new TerserPlugin({
+				test: /\.js(\?.*)?$/i,
 				parallel: true,
-				sourceMap: true
+				extractComments: true,
 			}),
 			new OptimizeCSSAssetsPlugin({})
 		]
