@@ -13,24 +13,25 @@ class DemoElement extends BaseElement {
 	private static $icon = 'font-icon-p-a';
 	private static $table_name = 'DemoElement';
 
-	/*
+	/**
 	 * For elements that are more complex (e.g. have a Gridfield) disable the
 	 * in-line edit form by setting private static $inline_editable = false
-	*/
+	 */
 
 	private static $db = [
 		'DemoText' => 'Text',
 	];
 
-	public function getCMSFields() {
+	public function getCMSFields()
+	{
 		$fields = parent::getCMSFields();
-
 		$fields->addFieldToTab('Root.Main', TextareaField::create('DemoText', 'Demo text'));
-
 		return $fields;
 	}
 
-	public function getType() {
+	public function getType()
+	{
 		return 'Demo Element';
 	}
+
 }

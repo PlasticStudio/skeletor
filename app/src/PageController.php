@@ -2,7 +2,6 @@
 
 use SilverStripe\CMS\Controllers\ContentController;
 use SilverStripe\View\Requirements;
-use SilverStripe\Control\Director;
 
 class PageController extends ContentController {
 

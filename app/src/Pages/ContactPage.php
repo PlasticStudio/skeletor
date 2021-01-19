@@ -29,8 +29,8 @@ class ContactPage extends Page {
         'Submissions' => FormSubmission::class
     ];
 
-    public function getCMSFields(){
-	
+	public function getCMSFields()
+	{
         $fields = parent::getCMSFields();
 		
 		$fields->addFieldToTab(
@@ -50,20 +50,20 @@ class ContactPage extends Page {
 			)->setDescription('Displayed in form submission email. Defaults to "'.SiteConfig::current_site_config()->Title.' contact form."')
 		);
 		$fields->addFieldToTab('Root.Delivery', CheckboxField::create('SendCustomerEmail', 'Send confirmation email to customer?'));
+
+        $fields->addFieldToTab(
+			'Root.Submissions', 
+			GridField::create(
+				'Submissions',
+				'Submissions',
+				$this->Submissions(),
+				GridFieldConfig_RecordEditor::create()
+			)
+		);
 		
-		// Submissions tab
-        $GridFieldConfig = GridFieldConfig_RecordEditor::create();
-        $SubmissionsField = GridField::create(
-            'Submissions',
-            'Submissions',
-            $this->Submissions(),
-            $GridFieldConfig
-        );
-        $fields->addFieldToTab('Root.Submissions', $SubmissionsField);
-		
-		// OnCompletion tab
 		$fields->addFieldToTab('Root.Delivery', HTMLEditorField::create('SuccessMessage', 'Message to show after form submission'));
 		
         return $fields;		
-    }
+	}
+	
 }
