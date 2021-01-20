@@ -1,1 +1,0 @@
-[2021-01-20 12:33:58] error-log.NOTICE: E_NOTICE: Array to string conversion {"code":8,"message":"Array to string conversion","file":"/var/www/html/app/src/DataObjects/FormSubmission.php","line":109} []
