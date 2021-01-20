@@ -2,15 +2,19 @@
 
 namespace Skeletor\DataObjects;
 
-use SilverStripe\ORM\DataObject;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Dev\Debug;
+use Psr\Log\LoggerInterface;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\View\ArrayData;
-use SilverStripe\Control\Email\Email;
 use SilverStripe\Control\Director;
 use SilverStripe\Control\Controller;
+use SilverStripe\Control\Email\Email;
+use SilverStripe\Forms\ReadonlyField;
+use SilverStripe\Forms\TextareaField;
 use SilverStripe\SiteConfig\SiteConfig;
+use Skeletor\Admin\FormSubmissionAdmin;
+use SilverStripe\Core\Injector\Injector;
 
 class FormSubmission extends DataObject {
 
@@ -37,7 +41,8 @@ class FormSubmission extends DataObject {
 		'IPAddress' 	=> 'IP Address'
 	];
 
-	public function getCMSFields(){
+	public function getCMSFields()
+	{
 		$fields = parent::getCMSFields();
 
 		$fields->addFieldToTab('Root.Main', ReadonlyField::create('OriginTitle','Origin',$this->Origin()->Title));
@@ -49,36 +54,49 @@ class FormSubmission extends DataObject {
 		return $fields;
 	}
 
-
 	/**
 	 * Send emails responding to this submission
 	 *
 	 * @return Boolean
 	 **/
-	public function SendEmail($fields = null){
-		$config = $this->SiteConfig();
-		$payload = $this->Payload();
-
-		$subject = $config->Title. ' ' . $this->Origin()->Title . ' form submission';
-		$from = $config->EmailFrom();
-		$to = $this->EmailRecipients();
-
-		if (!$to){
-			trigger_error("Cannot send email: no Email Recipients defined in settings");
+	public function SendEmail($fields = null)
+	{
+		$recipients = $this->EmailRecipients();
+		if (!$recipients) {
+			Injector::inst()->get(LoggerInterface::class)->error('Cannot send email: no Email Recipients defined in settings.');
+			return false;
 		}
 
-		$body = Controller::curr()->customise([
+		// validate email addresses before attempting to send
+		$to = [];
+		foreach ($recipients as $recipient) {
+			if (filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+				$to[] = $recipient;
+			}
+		}
+
+		$config = $this->SiteConfig();
+
+		$email = Email::create()
+			->setHTMLTemplate('Email\\FormSubmission') 
+			->setData([
 				'Submission' => $this,
 				'Payload' => $this->PayloadAsArray($fields)
-			])->renderWith(['Email/FormSubmission_'.$this->OriginClass, 'Email/FormSubmission'])->value;
+			])
+			->setTo($to)
+			->setSubject($config->Title. ' ' . $this->Origin()->Title . ' form submission');
+			
 
-		$email = Email::create($from, $to, $subject, $body, null, 'client@plasticstudio.co.nz');
+		if ($config->EmailFrom() && !empty($config->EmailFrom())) {
+			$email->setFrom($config->EmailFrom());
+		}
 
-		if ($config->EmailReplyTo){
-			$email->replyTo($config->EmailReplyTo);
+		if ($config->EmailReplyTo && !empty($config->EmailReplyTo)) {
+			$email->setReplyTo($config->EmailReplyTo);
 		}
 
 		return $email->send();
+
 	}
 
 	/**
@@ -86,33 +104,58 @@ class FormSubmission extends DataObject {
 	 *
 	 * @return Boolean
 	 **/
-	public function SendConfirmationEmail($fields = null){
+	public function SendConfirmationEmail($fields = null)
+	{
+		
 		$config = $this->SiteConfig();
 		$payload = $this->Payload();
-
-		$subject = $config->Title. ' ' . $this->Origin()->Title . ' form submission confirmation';
-		$from = $config->EmailFrom();
 		$to = $payload['Email'];
+		
+		if (filter_var($to, FILTER_VALIDATE_EMAIL)) {
+			$email = Email::create()
+				->setHTMLTemplate('Email\\FormSubmission_Confirmation') 
+				->setData([
+					'Submission' => $this,
+					'Payload' => $this->PayloadAsArray($fields)
+				])
+				->setTo($to)
+				->setSubject($config->Title. ' ' . $this->Origin()->Title . ' form submission');
 
-		$body = Controller::curr()->customise([
-				'Submission' => $this,
-				'Payload' => $this->PayloadAsArray($fields)]
-			)->renderWith(['Email/FormSubmission_'.$this->OriginClass.'_Confirmation', 'Email/FormSubmission_Confirmation']);
+			if ($config->EmailFrom() && !empty($config->EmailFrom())) {
+				$email->setFrom($config->EmailFrom());
+			}
 
-		$email = Email::create($from, $to, $subject, $body);
+			if ($config->EmailReplyTo && !empty($config->EmailReplyTo)) {
+				$email->setReplyTo($config->EmailReplyTo);
+			}
 
-		if ($config->EmailReplyTo){
-			$email->replyTo($config->EmailReplyTo);
+			return $email->send();
+
+		} else {
+			return false;
 		}
-
-		return $email->send();
+		
 	}
 
-	public function EditLink(){
-		return Director::absoluteBaseURL() . 'admin/form-submissions/FormSubmission/EditForm/field/FormSubmission/item/'.$this->ID.'/edit';
+	public function EditLink()
+	{
+		$admin = Injector::inst()->get(FormSubmissionAdmin::class);
+		$classname = str_replace('\\', '-', $this->ClassName);
+		
+		return Controller::join_links(
+			Director::absoluteBaseURL(),
+			$admin->Link($classname),
+            "EditForm",
+			'field',
+			$classname,
+			'item',
+			$this->ID,
+			'edit'
+		);
 	}
 
-	public function SiteConfig(){
+	public function SiteConfig()
+	{
 		return SiteConfig::current_site_config();
 	}
 
@@ -121,7 +164,8 @@ class FormSubmission extends DataObject {
 	 *
 	 * @return Array
 	 **/
-	public function Payload(){
+	public function Payload()
+	{
 		return json_decode($this->Payload, true);
 	}
 
@@ -131,23 +175,22 @@ class FormSubmission extends DataObject {
 	 *
 	 * @return ArrayList
 	 **/
-	public function PayloadAsArray($fields = null){
+	public function PayloadAsArray($fields = null)
+	{
 		$array = ArrayList::create();
 		$payload = $this->Payload();
 
 		// We've explicitly stated what fields we want to use (in the form action)
-		if ($fields){
-			foreach ($fields as $field){
+		if ($fields) {
+			foreach ($fields as $field) {
 				$array->push(ArrayData::create([
 					'Name' => $field,
 					'Value' => (isset($payload[$field]) ? $payload[$field] : null)
 				]));
 			}
 		} else {
-
 			// Loop over *all* form field data values
-			foreach ($payload as $key => $value){
-
+			foreach ($payload as $key => $value) {
 				// Make sure these values are frontend-friendly. Exclude known system values.
 				if ($key !== 'SecurityID' && substr($key, 0, 7) !== "action_"){
 					$array->push(ArrayData::create([
@@ -166,9 +209,9 @@ class FormSubmission extends DataObject {
 	 *
 	 * @return Array
 	 **/
-	public function EmailRecipients(){
-
-		if(  isset($this->Origin()->Recipients) && !is_null($this->Origin()->Recipients) ) {
+	public function EmailRecipients()
+	{
+		if (isset($this->Origin()->Recipients) && !is_null($this->Origin()->Recipients)) {
 			return str_getcsv($this->Origin()->Recipients, ',');
 		} else {
 			return SiteConfig::current_site_config()->EmailRecipients();

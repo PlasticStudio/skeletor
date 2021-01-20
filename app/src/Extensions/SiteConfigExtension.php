@@ -42,8 +42,9 @@ class SiteConfigExtension extends DataExtension {
 	 *
 	 * @return String
 	 **/
-	public static function EmailFrom(){
-		if ($email = Environment::getEnv('SS_SEND_ALL_EMAILS_FROM')){
+	public static function EmailFrom()
+	{
+		if ($email = Environment::getEnv('SS_SEND_ALL_EMAILS_FROM')) {
 			return $email;
 		}
 		return "noreply@plasticstudio.co";
@@ -56,8 +57,12 @@ class SiteConfigExtension extends DataExtension {
 	 *
 	 * @return Array
 	 **/
-	public function EmailRecipients(){
-		return str_getcsv($this->owner->EmailRecipients, ',');
+	public function EmailRecipients()
+	{
+		if (isset($this->owner->EmailRecipients) && !is_null($this->owner->EmailRecipients)) {
+			return str_getcsv($this->owner->EmailRecipients, ',');
+		}
+		return false;
 	}
 
 }
