@@ -1,7 +1,5 @@
-
 <% if MoreThanOnePage %>
     <div class="pagination center">
-    
         <% if NotFirstPage %>
             <a class="prev button blue readmore" href="$PrevLink" title="View the previous page">Prev</a>
         <% else %>	
@@ -16,7 +14,5 @@
         <% else %>	
             <span class="next disabled button">Next</span>
         <% end_if %>
-        
     </div>
-    
 <% end_if %>
