@@ -19,8 +19,6 @@ class ContactPage extends Page {
 
     private static $db = [
         'Recipients'		=> 'Varchar(1024)',
-		'FromEmail'			=> 'Varchar(255)',
-		'FromName'			=> 'Varchar(255)',
 		'SendCustomerEmail'	=> 'Boolean(false)',
 		'SuccessMessage'	=> 'HTMLText'
     ];
@@ -40,16 +38,8 @@ class ContactPage extends Page {
 				'Recipients'
 			)->setDescription('Comma-separated list of email addresses to send this form to')
 		);
-		$fields->addFieldToTab('Root.Delivery', TextField::create('FromEmail', '"From" & "Reply-to" email')->setDescription('Displayed in form submission email.')
-		);
-		$fields->addFieldToTab(
-			'Root.Delivery', 
-			TextField::create(
-				'FromName', 
-				'From name'
-			)->setDescription('Displayed in form submission email. Defaults to "'.SiteConfig::current_site_config()->Title.' contact form."')
-		);
 		$fields->addFieldToTab('Root.Delivery', CheckboxField::create('SendCustomerEmail', 'Send confirmation email to customer?'));
+		$fields->addFieldToTab('Root.Delivery', HTMLEditorField::create('SuccessMessage', 'Message to show after form submission'));
 
         $fields->addFieldToTab(
 			'Root.Submissions', 
@@ -60,9 +50,7 @@ class ContactPage extends Page {
 				GridFieldConfig_RecordEditor::create()
 			)
 		);
-		
-		$fields->addFieldToTab('Root.Delivery', HTMLEditorField::create('SuccessMessage', 'Message to show after form submission'));
-		
+	
         return $fields;		
 	}
 	

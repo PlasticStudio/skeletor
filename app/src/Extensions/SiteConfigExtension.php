@@ -59,7 +59,10 @@ class SiteConfigExtension extends DataExtension {
 	 **/
 	public function EmailRecipients()
 	{
-		return str_getcsv($this->owner->EmailRecipients, ',');
+		if (isset($this->owner->EmailRecipients) && !is_null($this->owner->EmailRecipients)) {
+			return str_getcsv($this->owner->EmailRecipients, ',');
+		}
+		return false;
 	}
 
 }

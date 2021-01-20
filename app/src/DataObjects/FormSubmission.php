@@ -2,6 +2,8 @@
 
 namespace Skeletor\DataObjects;
 
+use SilverStripe\Dev\Debug;
+use Psr\Log\LoggerInterface;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\View\ArrayData;
@@ -52,7 +54,6 @@ class FormSubmission extends DataObject {
 		return $fields;
 	}
 
-
 	/**
 	 * Send emails responding to this submission
 	 *
@@ -60,29 +61,42 @@ class FormSubmission extends DataObject {
 	 **/
 	public function SendEmail($fields = null)
 	{
-		$config = $this->SiteConfig();
-		$payload = $this->Payload();
-
-		$subject = $config->Title. ' ' . $this->Origin()->Title . ' form submission';
-		$from = $config->EmailFrom();
-		$to = $this->EmailRecipients();
-
-		if (!$to){
-			trigger_error("Cannot send email: no Email Recipients defined in settings");
+		$recipients = $this->EmailRecipients();
+		if (!$recipients) {
+			Injector::inst()->get(LoggerInterface::class)->error('Cannot send email: no Email Recipients defined in settings.');
+			return false;
 		}
 
-		$body = Controller::curr()->customise([
+		// validate email addresses before attempting to send
+		$to = [];
+		foreach ($recipients as $recipient) {
+			if (filter_var($recipient, FILTER_VALIDATE_EMAIL)) {
+				$to[] = $recipient;
+			}
+		}
+
+		$config = $this->SiteConfig();
+
+		$email = Email::create()
+			->setHTMLTemplate('Email\\FormSubmission') 
+			->setData([
 				'Submission' => $this,
 				'Payload' => $this->PayloadAsArray($fields)
-			])->renderWith(['Email/FormSubmission_'.$this->OriginClass, 'Email/FormSubmission'])->value;
+			])
+			->setTo($to)
+			->setSubject($config->Title. ' ' . $this->Origin()->Title . ' form submission');
+			
 
-		$email = Email::create($from, $to, $subject, $body, null, 'client@plasticstudio.co.nz');
+		if ($config->EmailFrom() && !empty($config->EmailFrom())) {
+			$email->setFrom($config->EmailFrom());
+		}
 
-		if ($config->EmailReplyTo){
-			$email->replyTo($config->EmailReplyTo);
+		if ($config->EmailReplyTo && !empty($config->EmailReplyTo)) {
+			$email->setReplyTo($config->EmailReplyTo);
 		}
 
 		return $email->send();
+
 	}
 
 	/**
@@ -92,25 +106,35 @@ class FormSubmission extends DataObject {
 	 **/
 	public function SendConfirmationEmail($fields = null)
 	{
+		
 		$config = $this->SiteConfig();
 		$payload = $this->Payload();
-
-		$subject = $config->Title. ' ' . $this->Origin()->Title . ' form submission confirmation';
-		$from = $config->EmailFrom();
 		$to = $payload['Email'];
+		
+		if (filter_var($to, FILTER_VALIDATE_EMAIL)) {
+			$email = Email::create()
+				->setHTMLTemplate('Email\\FormSubmission_Confirmation') 
+				->setData([
+					'Submission' => $this,
+					'Payload' => $this->PayloadAsArray($fields)
+				])
+				->setTo($to)
+				->setSubject($config->Title. ' ' . $this->Origin()->Title . ' form submission');
 
-		$body = Controller::curr()->customise([
-			'Submission' => $this,
-			'Payload' => $this->PayloadAsArray($fields)
-		])->renderWith(['Email/FormSubmission_'.$this->OriginClass.'_Confirmation', 'Email/FormSubmission_Confirmation']);
+			if ($config->EmailFrom() && !empty($config->EmailFrom())) {
+				$email->setFrom($config->EmailFrom());
+			}
 
-		$email = Email::create($from, $to, $subject, $body);
+			if ($config->EmailReplyTo && !empty($config->EmailReplyTo)) {
+				$email->setReplyTo($config->EmailReplyTo);
+			}
 
-		if ($config->EmailReplyTo) {
-			$email->replyTo($config->EmailReplyTo);
+			return $email->send();
+
+		} else {
+			return false;
 		}
-
-		return $email->send();
+		
 	}
 
 	public function EditLink()

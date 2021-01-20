@@ -18,7 +18,8 @@ class ContactPageController extends PageController {
 
     private static $allowed_actions = [
 		'Form',
-		'submitted'
+		'submitted',
+		'submissionerror'
 	];
 
 	public function init()
@@ -30,6 +31,10 @@ class ContactPageController extends PageController {
 	{
 		if ($this->FormSubmitted()) {
 			return DBHTMLText::create()->setValue($this->SuccessMessage);
+		}
+
+		if ($this->FormSubmissionError()) {
+			return DBHTMLText::create()->setValue('<p>Something went wrong and the form could not be submitted. Please try again later.</p>');
 		}
 
 		$fields = FieldList::create(
@@ -55,14 +60,16 @@ class ContactPageController extends PageController {
 		$submission->OriginID = $this->ID;
 		$submission->OriginClass = $this->ClassName;
 		$submission->write();
-        $submission->SendEmail();
 
-        // check if send confirmation email is set
-		if ($this->SendCustomerEmail == true ) {
-			$submission->SendConfirmationEmail();
+		if ($submission->SendEmail()) {
+			if ($this->SendCustomerEmail == true ) {
+				$submission->SendConfirmationEmail();
+			}
+			$this->redirect($this->Link('submitted'));
+		} else {
+			$this->redirect($this->Link('submissionerror'));
 		}
-
-		$this->redirect($this->Link('submitted')); 
+        
     }
 
     /**
@@ -73,5 +80,15 @@ class ContactPageController extends PageController {
 	{
 		$params = $this->getRequest()->params();
 		return (isset($params['Action']) && $params['Action'] == 'submitted');
+	}
+
+    /**
+     * checks if session has a form submission
+     * @return  bool
+     */
+	public function FormSubmissionError()
+	{
+		$params = $this->getRequest()->params();
+		return (isset($params['Action']) && $params['Action'] == 'submissionerror');
 	}
 }
