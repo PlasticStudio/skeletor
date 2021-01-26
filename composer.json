@@ -19,6 +19,7 @@
         "test": "phpunit",
         "post-update-cmd": "GDM\\SSAutoGitIgnore\\UpdateScript::Go"
     },
+    "type": "silverstripe-project",
     "extra": {
         "project-files-installed": [
             "app/.htaccess",
@@ -35,7 +36,10 @@
             "install-frameworkmissing.html",
             "install.php",
             "web.config"
-        ]
+        ],
+        "expose": [
+            "app/client"
+          ]
     },
     "autoload-dev": {
         "classmap": [
