@@ -10,7 +10,8 @@ class PageController extends ContentController {
 	public function init() 
 	{
 		parent::init();
-		Requirements::css('app/dist/index.css');
-		Requirements::javascript('app/dist/index.js');
+		Requirements::javascript('resources/app/client/dist/index.js');
+      	Requirements::css('resources/app/client/dist/index.css');
+      	Requirements::set_force_js_to_bottom(true);
 	}
 }

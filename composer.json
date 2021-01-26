@@ -33,12 +33,10 @@
         "public-files-installed": [
             ".htaccess",
             "index.php",
-            "install-frameworkmissing.html",
-            "install.php",
             "web.config"
-        ],
+        ],        
         "expose": [
-            "app/client"
+            "app/client/dist"
           ]
     },
     "autoload-dev": {

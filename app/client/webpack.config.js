@@ -9,7 +9,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
-const output_dir = __dirname +"/app/dist";
+const output_dir = __dirname +"/app/client/dist";
 //
 // console.log(process.env.NODE_ENV);
 
