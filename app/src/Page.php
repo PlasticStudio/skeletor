@@ -78,12 +78,24 @@ class Page extends SiteTree {
 		// Identify whether the requested property is a property or a method()
 		$is_method = $page->hasMethod($property);
 
-		// Recursively go up the tree looking for our property with a non-falsy value
-		while ($page->ParentID > 0 && ! ($is_method ? ($page->$property() && $page->$property()->exists()) : ($page->$property !== null))){
+		while ($page->ParentID > 0) {
+			if ($is_method) {
+				if ($page->$property() && $page->$property()->exists()) {
+					break;
+				}
+			} elseif ($page->$property !== null) {
+				break;
+			}
 			$page = $page->Parent();
 		}
 
-		return ($is_method ? $page->$property() : $page->$property);
+		if ($is_method) {
+			$property = $page->$property();
+		} else {
+			$property = $page->$property;
+		}
+
+		return $property;
 	}
 
 
