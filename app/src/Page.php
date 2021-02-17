@@ -2,8 +2,10 @@
 
 use SilverStripe\Dev\Debug;
 use SilverStripe\Assets\Image;
+use SilverStripe\Core\ClassInfo;
 use SilverStripe\Forms\TextField;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\AssetAdmin\Forms\UploadField;
@@ -49,9 +51,14 @@ class Page extends SiteTree {
 	 */
 	public function MyController()
 	{
-		$class = $this->getControllerName();
-		if (class_exists($class)) {
-			return new $class();
+		if ($controller_name = Config::inst()->get(static::class, 'controller_name')) {
+            $controller = $controller_name;
+        } else {
+			$class = ClassInfo::ShortName($this->getClassName());
+			$controller = sprintf('%sController', $class);
+		}
+		if (class_exists($controller)) {
+			return new $controller();
 		}
 		return false;
 	}
