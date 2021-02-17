@@ -34,4 +34,4 @@
 	<% include GoogleAnalytics %>
 
 </head>
-<body class="<% if URLSegment == 'Security' %>Security<% else %>$ClassName<% end_if %>">
+<body class="<% if URLSegment == 'Security' %>Security<% else %>$ClassName.ShortName<% end_if %>">

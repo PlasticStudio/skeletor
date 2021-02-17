@@ -8,8 +8,6 @@
 			<% include Menu %>
 		</div>
 	</header>
-
 	<% include Banner %>
-
 	$Layout
 <% include Footer %>
