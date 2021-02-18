@@ -31,14 +31,13 @@ class Page extends SiteTree {
 	{
 		$fields = parent::getCMSFields();
 
-		if ($this->ClassName != 'SilverStripe\CMS\Model\RedirectorPage' ) {
-			$fields->addFieldToTab(
-				'Root.Main.Metadata',
+		if ($fields->fieldByName('Root.Main.Metadata.MetaDescription')) {
+			$fields->insertBefore(
+				'MetaDescription',
 				TextField::create('MetaTitle','Meta Title')
 					->setRightTitle('Customised title for use in search engines. Defaults to the page title.'),
-				'MetaDescription'
 			);
-			$fields->addFieldToTab("Root.Main.Metadata", TextareaField::create('MetaKeywords', 'Meta Keywords'), 'MetaDescription');
+			$fields->insertBefore('MetaDescription', TextareaField::create('MetaKeywords', 'Meta Keywords'));
 		}
 		$fields->addFieldsToTab('Root.Banner', UploadField::create('BannerImage', 'Banner Image')->setFolderName('Banners'));
 
