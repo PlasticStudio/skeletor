@@ -9,6 +9,10 @@ Base install for all PlasticStudio projects.
 
 ## Functionality
 Describe any noteworthy pieces of functionality specific to this project.
+Such as:
+For email send functionality, the `From` email address can be set globally in the `.env` file, like so:
+`SS_SEND_ALL_EMAILS_FROM="email@goes.here"`
+This setting will be retrieved by the `EmailFrom()` method in `SiteConfigExtension` (defaults to `noreply@plasticstudio.co` if not set).
 
 
 ## Key Integrations
