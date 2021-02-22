@@ -1,4 +1,5 @@
 <?php
+
 namespace Skeletor\Extensions;
 
 use SilverStripe\Assets\Image;

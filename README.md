@@ -8,9 +8,7 @@ Base install for all PlasticStudio projects.
 
 
 ## Functionality
-Describe any noteworthy pieces of functionality specific to this project.
-
-Such as:
+Describe any noteworthy pieces of functionality specific to this project. Such as:
 
 For email send functionality, the `From` email address can be set globally in the `.env` file, like so:
 
