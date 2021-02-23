@@ -70,9 +70,10 @@ class PageTest extends SapphireTest
 
     public function testGetLogoFromSiteConfig()
     {
-        // $site_config = $this->objFromFixture('Skeletor\Tests\PageTestSiteConfig', 'site_config');
+        $site_config = $this->objFromFixture('Skeletor\Tests\PageTestSiteConfig', 'site_config');
+        // $site_config = SiteConfig::current_site_config();
         $logo = $this->objFromFixture('SilverStripe\Assets\Image', 'site_logo');
-        $this->assertEquals($logo->Name, $this->page->getLogoFromSiteConfig(SiteConfig::current_site_config())->Name);
+        $this->assertEquals($logo->Name, $this->page->getLogoFromSiteConfig($site_config)->Name);
     }
 
 }
