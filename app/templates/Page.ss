@@ -1,6 +1,5 @@
 <% include DocumentHead %>
 	<header class="page-header">
-
 		<div class="inner">
 			<a class="branding" href="{$BaseURL}">
 				<img src="/app/images/logo.png" alt="{$SiteConfig.Title} logo" />
@@ -8,8 +7,6 @@
 			<% include Menu %>
 		</div>
 	</header>
-
 	<% include Banner %>
-
 	$Layout
 <% include Footer %>

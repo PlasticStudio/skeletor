@@ -2,8 +2,10 @@
 
 use SilverStripe\Dev\Debug;
 use SilverStripe\Assets\Image;
+use SilverStripe\Core\ClassInfo;
 use SilverStripe\Forms\TextField;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\SiteConfig\SiteConfig;
 use SilverStripe\AssetAdmin\Forms\UploadField;
@@ -29,14 +31,13 @@ class Page extends SiteTree {
 	{
 		$fields = parent::getCMSFields();
 
-		if ($this->ClassName != 'SilverStripe\CMS\Model\RedirectorPage' ) {
-			$fields->addFieldToTab(
-				'Root.Main.Metadata',
+		if ($fields->fieldByName('Root.Main.Metadata.MetaDescription')) {
+			$fields->insertBefore(
+				'MetaDescription',
 				TextField::create('MetaTitle','Meta Title')
 					->setRightTitle('Customised title for use in search engines. Defaults to the page title.'),
-				'MetaDescription'
 			);
-			$fields->addFieldToTab("Root.Main.Metadata", TextareaField::create('MetaKeywords', 'Meta Keywords'), 'MetaDescription');
+			$fields->insertBefore('MetaDescription', TextareaField::create('MetaKeywords', 'Meta Keywords'));
 		}
 		$fields->addFieldsToTab('Root.Banner', UploadField::create('BannerImage', 'Banner Image')->setFolderName('Banners'));
 
@@ -49,10 +50,14 @@ class Page extends SiteTree {
 	 */
 	public function MyController()
 	{
-		//todo
-		$class = $this->ClassName . "Controller";
-		if (class_exists($class)) {
-			return new $class();
+		if ($controller_name = Config::inst()->get(static::class, 'controller_name')) {
+            $controller = $controller_name;
+        } else {
+			$class = ClassInfo::ShortName($this->getClassName());
+			$controller = sprintf('%sController', $class);
+		}
+		if (class_exists($controller)) {
+			return new $controller();
 		}
 		return false;
 	}
@@ -72,12 +77,24 @@ class Page extends SiteTree {
 		// Identify whether the requested property is a property or a method()
 		$is_method = $page->hasMethod($property);
 
-		// Recursively go up the tree looking for our property with a non-falsy value
-		while ($page->ParentID > 0 && ! ($is_method ? ($page->$property() && $page->$property()->exists()) : ($page->$property !== null))){
+		while ($page->ParentID > 0) {
+			if ($is_method) {
+				if ($page->$property() && $page->$property()->exists()) {
+					break;
+				}
+			} elseif ($page->$property !== null) {
+				break;
+			}
 			$page = $page->Parent();
 		}
 
-		return ($is_method ? $page->$property() : $page->$property);
+		if ($is_method) {
+			$property = $page->$property();
+		} else {
+			$property = $page->$property;
+		}
+
+		return $property;
 	}
 
 

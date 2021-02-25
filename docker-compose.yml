@@ -21,6 +21,8 @@ services:
       - example
     depends_on:
       - database
+    environment:
+      - DOCUMENT_ROOT=/var/www/html/public
 
   database:
     image: mysql:latest

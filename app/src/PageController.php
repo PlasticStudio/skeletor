@@ -1,7 +1,10 @@
 <?php
 
-use SilverStripe\CMS\Controllers\ContentController;
+use SilverStripe\View\SSViewer;
 use SilverStripe\View\Requirements;
+use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\CMS\Controllers\ContentController;
+use DNADesign\Elemental\Models\BaseElement;
 
 class PageController extends ContentController {
 
@@ -10,7 +13,30 @@ class PageController extends ContentController {
 	public function init() 
 	{
 		parent::init();
-		Requirements::css('app/dist/index.css');
-		Requirements::javascript('app/dist/index.js');
+		Requirements::javascript('resources/app/client/dist/index.js');
+      	Requirements::css('resources/app/client/dist/index.css');
+      	Requirements::set_force_js_to_bottom(true);
+	}
+
+	public function MenuCacheKey()
+	{
+		$fragments = [
+			'main_menu',
+			$this->ID,
+			SiteTree::get()->max('LastEdited'),
+			SiteTree::get()->count()
+		];
+		return implode('-_-', $fragments);
+	}
+
+	public function ElementalAreaCacheKey()
+	{
+		$fragments = [
+			'elemental_area',
+			$this->ID,
+			BaseElement::get()->max('LastEdited'),
+			BaseElement::get()->count()
+		];
+		return implode('-_-', $fragments);
 	}
 }
