@@ -75,6 +75,11 @@ class FormSubmission extends DataObject {
 			}
 		}
 
+		if (empty($to)) {
+			Injector::inst()->get(LoggerInterface::class)->error('Cannot send email: no valid email addresses');
+			return false;
+		}
+
 		$config = $this->SiteConfig();
 
 		$email = Email::create()
@@ -132,6 +137,7 @@ class FormSubmission extends DataObject {
 			return $email->send();
 
 		} else {
+			Injector::inst()->get(LoggerInterface::class)->error('Cannot send email: no valid email addresses');
 			return false;
 		}
 		

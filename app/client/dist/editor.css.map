@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./_editor.scss"],"names":[],"mappings":"AAAA,WACI,eAAgB","file":"editor.css","sourcesContent":[".something {\r\n    background: blue;\r\n}"],"sourceRoot":""}

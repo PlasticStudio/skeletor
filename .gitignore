@@ -2,6 +2,7 @@
 /vendor/
 /silverstripe-cache/
 /app/client/node_modules/
+/node_modules/
 /public/assets/
 /public/resources/
 .DS_Store

@@ -9,14 +9,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const devMode = process.env.NODE_ENV !== 'production';
-const output_dir = __dirname +"/app/client/dist";
+const output_dir = __dirname +"/dist";
 //
 // console.log(process.env.NODE_ENV);
 
 module.exports = {
 	entry: {
-		index: "./src/js/index.js",
-		editor: "./src/scss/cms/_editor.scss"
+		index: __dirname +"/src/js/index.js",
+		editor: __dirname +"/src/scss/cms/_editor.scss"
 	},
 	output: {
 		path: output_dir,
