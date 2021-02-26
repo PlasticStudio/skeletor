@@ -36,8 +36,9 @@
             "web.config"
         ],        
         "expose": [
-            "app/client/dist"
-          ]
+            "app/client/dist",
+            "app/client/assets"
+        ]
     },
     "autoload-dev": {
         "classmap": [
