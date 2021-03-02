@@ -17,6 +17,15 @@ For email send functionality, the `From` email address can be set globally in th
 This setting will be retrieved by the `EmailFrom()` method in `SiteConfigExtension` (defaults to `noreply@plasticstudio.co` if not set).
 
 
+## DEBUGBAR
+`LeKoala\DebugBar\DebugBar` is installed. It can be disabled in the following ways:
+- in the env (`DEBUGBAR_DISABLE=true`)
+- in configiration yml (`LeKoala\DebugBar\DebugBar disabled: true`)
+
+If the debugbar is not rendering in your local env, you may need to disable the check for local ip. This can be done in config:
+- `LeKoala\DebugBar\DebugBar check_local_ip: false`
+
+
 ## Key Integrations
 Such as integrations with a third party via API, upstream or downstream dependencies, etc.
 

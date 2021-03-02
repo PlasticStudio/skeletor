@@ -3,17 +3,13 @@ services:
   web:
     image: joeplastic/silverstripe-base:7.3-apache
     working_dir: /var/www/html
-    restart: always
     volumes:
       - type: bind
         source: ./
-        target: /var/www/html      
-      - type: volume
-        source: index
-        target: /index
+        target: /var/www/html
+      - ~/.ssh:/tmp/.ssh:ro
     ports:
       - '80:80'
-      - '8983:8983'
     environment:
       - VIRTUAL_HOST=local.dev
       #- NODE_VERSION=6.14.4
@@ -31,7 +27,6 @@ services:
       - '3306:3306'
     volumes:
       - db-data:/var/lib/mysql
-    restart: always
     networks:
       - example
     environment:
@@ -39,7 +34,6 @@ services:
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
-    restart: always
     ports:
       - "8080:80"
     environment:
@@ -52,7 +46,6 @@ services:
       
   mailhog:
     image: mailhog/mailhog:latest
-    restart: always    
     networks:
       - example
     ports:
@@ -61,7 +54,6 @@ services:
 
 volumes:
   db-data:
-  index: # volume for solr
 
 networks:
   example:

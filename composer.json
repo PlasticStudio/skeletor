@@ -11,8 +11,7 @@
         "gdmedia/ss-auto-git-ignore": "^1",
         "jaedb/iconfield": "^1",
         "plasticstudio/sitemap": "^2.2",
-        "dnadesign/silverstripe-elemental": "^4",
-        "lekoala/silverstripe-debugbar": "^2.0"
+        "dnadesign/silverstripe-elemental": "^4"
     },
     "prefer-stable": true,
     "minimum-stability": "dev",
@@ -35,7 +34,7 @@
             ".htaccess",
             "index.php",
             "web.config"
-        ],        
+        ],
         "expose": [
             "app/client/dist",
             "app/client/assets"
@@ -50,6 +49,7 @@
         "phpunit/phpunit": "^5.7",
         "squizlabs/php_codesniffer": "3.*",
         "silverstripe/behat-extension": "^4.2",
-        "dnadesign/silverstripe-populate": "^2.0"
+        "dnadesign/silverstripe-populate": "^2.0",
+        "lekoala/silverstripe-debugbar": "2.0.4"
     }
 }

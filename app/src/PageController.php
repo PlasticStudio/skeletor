@@ -1,10 +1,9 @@
 <?php
 
-use SilverStripe\View\SSViewer;
 use SilverStripe\View\Requirements;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Control\Controller;
 use SilverStripe\CMS\Controllers\ContentController;
-use DNADesign\Elemental\Models\BaseElement;
 
 class PageController extends ContentController {
 
@@ -24,14 +23,24 @@ class PageController extends ContentController {
 	public function MainMenuCacheKey()
 	{
 		$fragments = [
-			sprintf(
-                'main_menu_page-%s',
-                $this->ID
-            ),
+			'main_menu_per_page',
 			$this->ID,
 			SiteTree::get()->max('LastEdited'),
 			SiteTree::get()->count()
 		];
 		return implode('-_-', $fragments);
+	}
+
+	/**
+	 * return 
+	 */
+	public function ClientAssetsPath()
+	{
+		return Controller::join_links(
+			'resources',
+			'app',
+			'client',
+			'assets'
+		);
 	}
 }
