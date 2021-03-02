@@ -2,7 +2,7 @@
 	<div class="page-body__inner">
 
 		<h1>$Title</h1>
-		<% include ElementalArea %>
+		$ElementalArea
 		$Form
 
 		<h1>Heading 1</h1>

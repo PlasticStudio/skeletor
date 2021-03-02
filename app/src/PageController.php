@@ -18,24 +18,19 @@ class PageController extends ContentController {
       	Requirements::set_force_js_to_bottom(true);
 	}
 
-	public function MenuCacheKey()
+	/**
+	 * Key for cached version of main menu per page
+	 */
+	public function MainMenuCacheKey()
 	{
 		$fragments = [
-			'main_menu',
+			sprintf(
+                'main_menu_page-%s',
+                $this->ID
+            ),
 			$this->ID,
 			SiteTree::get()->max('LastEdited'),
 			SiteTree::get()->count()
-		];
-		return implode('-_-', $fragments);
-	}
-
-	public function ElementalAreaCacheKey()
-	{
-		$fragments = [
-			'elemental_area',
-			$this->ID,
-			BaseElement::get()->max('LastEdited'),
-			BaseElement::get()->count()
 		];
 		return implode('-_-', $fragments);
 	}
