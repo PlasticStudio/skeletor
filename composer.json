@@ -11,7 +11,8 @@
         "gdmedia/ss-auto-git-ignore": "^1",
         "jaedb/iconfield": "^1",
         "plasticstudio/sitemap": "^2.2",
-        "dnadesign/silverstripe-elemental": "^4"
+        "dnadesign/silverstripe-elemental": "^4",
+        "lekoala/silverstripe-debugbar": "^2.0"
     },
     "prefer-stable": true,
     "minimum-stability": "dev",
